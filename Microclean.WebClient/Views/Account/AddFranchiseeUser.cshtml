@@ -23,10 +23,11 @@
 </style>
 
 <script type="text/javascript">
-  $(document).ready(function () {      
+    $(document).ready(function () {
         GetAllState();
     });
 </script>
+<!-- Content Wrapper. Contains page content -->
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -40,6 +41,8 @@
         </div>
         <!-- /.container-fluid -->
     </section>
+
+
 
     <!-- Main content -->
     <section class="content">
@@ -123,34 +126,34 @@
                                         </div>
                                     </div>
                                 </div>
-                                    <div class="row">
-                                        <div class="col-sm-4 col-12">
-                                            <div class="form-group">
-                                                <label>Password</label>
-                                                <span style="color: red;">*</span>
-                                                <div class="input-group mb-3">
-                                                    <input type="password" class="form-control required pwdmath" placeholder="Enter Password" autocomplete="new-password" id="txtPassword">
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                                                    </div>
-                                                    <span class="error" id="error_password" style="display:none;"></span>
+                                <div class="row">
+                                    <div class="col-sm-4 col-12">
+                                        <div class="form-group">
+                                            <label>Password</label>
+                                            <span style="color: red;">*</span>
+                                            <div class="input-group mb-3">
+                                                <input type="password" class="form-control required pwdmath" placeholder="Enter Password" autocomplete="new-password" id="txtPassword">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4 col-12">
-                                            <div class="form-group">
-                                                <label>Confirm Password</label>
-                                                <span style="color: red;">*</span>
-                                                <div class="input-group mb-3">
-                                                    <input type="password" autocomplete="rutjfkde" class="form-control required pwdmath" placeholder="Enter Confirm Password" id="txtreinterpassword">
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                                                    </div>
-                                                    <span class="error" id="error_confirm_password" style="display:none;"></span>
-                                                </div>
+                                                <span class="error" id="error_password" style="display:none;"></span>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-sm-4 col-12">
+                                        <div class="form-group">
+                                            <label>Confirm Password</label>
+                                            <span style="color: red;">*</span>
+                                            <div class="input-group mb-3">
+                                                <input type="password" autocomplete="rutjfkde" class="form-control required pwdmath" placeholder="Enter Confirm Password" id="txtreinterpassword">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                                </div>
+                                                <span class="error" id="error_confirm_password" style="display:none;"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-sm-4 col-12">
                                         <div class="form-group">
@@ -190,73 +193,73 @@
                                         </div>
                                     </div>
                                 </div>
-                                    <div class="row">
-                                        <div class="col-sm-4 col-12">
-                                            <div class="form-group">
-                                                <label>State</label>
-                                                <span style="color: red;">*</span>
-                                                <div class="input-group mb-3">
-                                                    <select class="form-control checkrequire" id="ddlState" onchange="getdistrictbystateid(this)"></select>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
-                                                    </div>
-                                                    <span class="error" id="error_state" style="display: none;"></span>
+                                <div class="row">
+                                    <div class="col-sm-4 col-12">
+                                        <div class="form-group">
+                                            <label>State</label>
+                                            <span style="color: red;">*</span>
+                                            <div class="input-group mb-3">
+                                                <select class="form-control checkrequire" id="ddlState" onchange="getdistrictbystateid(this)"></select>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4 col-12">
-                                            <div class="form-group">
-                                                <label>District</label>
-                                                <span style="color: red;">*</span>
-                                                <div class="input-group mb-3">
-                                                    <select class="form-control" id="ddldistrictid" onchange="GetCityLocationbyDistrictid(this)"></select>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
-                                                    </div>
-                                                </div>
+                                                <span class="error" id="error_state" style="display: none;"></span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-sm-4 col-12">
-                                            <div class="form-group">
-                                                <label>City/Location</label>
-                                                <span style="color: red;">*</span>
-                                                <div class="input-group mb-3">
-                                                    <select class="form-control" id="ddlcitylocation" onchange="GetPincode(this);"></select>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
-                                                    </div>
+                                    <div class="col-sm-4 col-12">
+                                        <div class="form-group">
+                                            <label>District</label>
+                                            <span style="color: red;">*</span>
+                                            <div class="input-group mb-3">
+                                                <select class="form-control" id="ddldistrictid" onchange="GetCityLocationbyDistrictid(this)"></select>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4 col-12">
-                                            <div class="form-group">
-                                                <label>Pincode</label>
-                                                <span style="color: red;">*</span>
-                                                <div class="input-group mb-3">
-                                                    <input type="text" autocomplete="rutjfkde" class="form-control required pinlength" placeholder="Enter Pincode" id="txtPincode" maxlength="6">
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text"><i class="fa fa-map-pin" aria-hidden="true"></i></span>
-                                                    </div>
-                                                    <span class="error" id="error_pincode" style="display: none;"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="card-footer register_membership">
-                                                <button type="button" onclick="addNewEmployeeByFranchisee();" id="btnAddUser" class="btn btn-primary">Save</button>
-                                                <a href="/Account/FranchiseeUserList" class="btn btn-danger">Cancel</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- /.card-body -->
-</form>
+                                <div class="row">
+                                    <div class="col-sm-4 col-12">
+                                        <div class="form-group">
+                                            <label>City/Location</label>
+                                            <span style="color: red;">*</span>
+                                            <div class="input-group mb-3">
+                                                <select class="form-control" id="ddlcitylocation" onchange="GetPincode(this);"></select>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-12">
+                                        <div class="form-group">
+                                            <label>Pincode</label>
+                                            <span style="color: red;">*</span>
+                                            <div class="input-group mb-3">
+                                                <input type="text" autocomplete="rutjfkde" class="form-control required pinlength" placeholder="Enter Pincode" id="txtPincode" maxlength="6">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fa fa-map-pin" aria-hidden="true"></i></span>
+                                                </div>
+                                                <span class="error" id="error_pincode" style="display: none;"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="card-footer register_membership">
+                                            <button type="button" onclick="addNewEmployeeByFranchisee();" id="btnAddUser" class="btn btn-primary">Save</button>
+                                            <a href="/Account/FranchiseeUserList" class="btn btn-danger">Cancel</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </form>
                         <!-- /.card -->
                     </div>
                     <!-- /.col -->
