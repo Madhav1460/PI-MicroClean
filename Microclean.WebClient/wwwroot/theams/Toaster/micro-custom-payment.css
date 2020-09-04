@@ -1,0 +1,93 @@
+﻿.tableFixHead {
+    overflow-y: auto;
+    height: 150px;
+}
+
+#modal-default {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2000;
+    cursor: pointer;
+}
+
+#text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: #f2f2f2;
+    color: #000;
+    max-width: 1000px;
+    font-size: 13px;
+    padding: 15px;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+}
+
+.closebtn {
+    float: right;
+    background: #fff;
+    width: 30px;
+    height: 30px;
+    border-radius: 40px;
+    color: red;
+    position: relative;
+    top: -29px;
+    left: 18px;
+    font-weight: 600;
+    font-size: 17px;
+    text-align: center;
+    padding: 4px 0 0;
+}
+
+#text h2 {
+    background: #3c8dbc;
+    color: #fff;
+    text-align: center;
+    padding: 7px;
+    font-size: 16px;
+    margin: 0 0 10px;
+}
+
+table tr td {
+    font-size: 12px;
+}
+
+.tablehead td {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+input[readonly] {
+    background-color: #f6f6f6;
+}
+
+input {
+    margin: 3px 3px;
+}
+
+.txtclass {
+    height: 28px;
+    border: 1px solid #c5c5c5;
+    text-align: center;
+}
+
+.modal-content {
+    width: 110%;
+}
+
+.error {
+    color: red;
+    width: 100%;
+    margin-bottom: 0px;
+}
+
+.red_border {
+    border-color: red !important;
+}

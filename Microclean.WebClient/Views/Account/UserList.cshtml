@@ -1,0 +1,245 @@
+﻿
+@{
+    ViewData["Title"] = "UserList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .modal-header {
+        padding: 15px !important;
+        border-bottom: 1px solid #e5e5e5 !important;
+        background: linear-gradient(#e9ff0091, #fdfdfd) !important;
+    }
+
+    div.dataTables_wrapper div.dataTables_length select {
+        width: 58px !important;
+        display: inline-block;
+    }
+</style>
+<link href="~/theams/Toaster/ToasterCSS/toastr.css" rel="stylesheet" />
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header bread">
+        <div class="container-fluid">
+            <div class="row mb-2 top-title">
+                <div class="col-sm-9">
+                    <h4>User List</h4>
+                </div>
+                <div class="col-sm-3">
+                    <a href="/Account/AddUser" role="button" class="btn btn-success pull-right"><i class="fa fa-plus" aria-hidden="true"></i>  Create User</a>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card card-primary outer-row">
+                        <!-- /.card-header 1st section -->
+                        <div class="card-body myform">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="tbluser" class="table table-bordered table-striped tblbackground">
+                                        <thead>
+                                            <tr>
+                                                <th>Franchisee Name</th>
+                                                <th>Email</th>
+                                                <th>Mobile</th>
+                                                @*<th>Status</th>*@
+                                                @*<th>Action</th>*@
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<script src="~/theams/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/theams/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="~/theams/plugins/datatables-responsive/js/dataTables.responsive.js"></script>
+<script src="~/ServiceScript/BaseUrl.js"></script>
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js" integrity="sha256-4F7e4JsAJyLUdpP7Q8Sah866jCOhv72zU5E8lIRER4w=" crossorigin="anonymous"></script>*@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js" crossorigin="anonymous"></script>
+<script src="~/theams/Toaster/ToasterJS/toastr.js"></script>
+
+<script type="text/javascript">
+  var token = localStorage.getItem('token');
+    $(document).ready(function () {
+        debugger;
+        var baseURL = baseurl + 'Franchisee/getalluser';
+     var table = $("#tbluser").DataTable({
+         "paging": true,
+            "responsive": true,
+            "autoWidth": false,
+            "columnDefs": [{
+                "searchable": false,
+                "orderable": false,
+                "targets": 0
+            }],
+            "iDisplayLength": 10,
+         "ajax": {
+                "url": baseURL,
+                "headers": {
+                "Authorization": "Bearer " + token
+              },
+                "type": "GET",
+                "datatype": "json"
+              },
+            "columns": [
+                //{ "data": null, "searchable": false,"sortable": false}, //for #
+                { "data": "fullName", "name": "Franchisee Name", "autoWidth": true },
+                { "data": "emailId", "name": "Email", "autoWidth": true },
+                { "data": "phoneNo", "title": "Mobile No", "name": "Mobile", "autoWidth": true },
+                //{
+                //    "data": "approveStatus", "name": "Status", "autoWidth": true,
+                //    "render": function (data, type, row, meta) {
+                //        debugger;
+                //        if (data == "Approve") {
+                //            return '<span id="activeUser" class="badge badge-success">' + data + '</span>'
+                //        } else {
+                //            return '<span id="inactiveUser" class="badge badge-danger">' + data + '</span>'
+                //        }
+                //    },
+                //},
+                //{
+                //    "title": "Actions",
+                //    "data": "approveStatus",
+                //    "searchable": false,
+                //    "sortable": false,
+                //    "render": function (data, type, row, meta) {
+                //        debugger;
+                //        if (data == "Approve") {
+                //            return ' <a class="btn btn-danger btn-sm" style="font-weight:600" href="javascript:void(0);"  onclick=InactiveData("' + row.id + '"); return false;> <i class="fa fa-times" aria-hidden="true"></i> Disapprove</a>';
+                //        } else {
+                //            return '  <a class="btn btn-success btn-sm" style="font-weight:600" href="javascript:void(0);"  onclick=ActiveData("' + row.id + '"); return false;> <i class="fa fa-check" aria-hidden="true"></i> Approve </a>';
+                //        }
+                //    },
+                //}
+            ]
+        });
+    });
+
+     function InactiveData(id) {
+        debugger;
+        //var userId = parseInt(id);
+        bootbox.confirm({
+            //title: 'Inactive Franchisee',
+            title: "<span style='font-weight:600;'>Active Franchisee</span>",
+            message: 'Are you sure want to Disapprove this Franchisee?',
+            buttons: {
+                'cancel': {
+                    label: 'No',
+                    className: 'btn-default pull-right'
+                },
+                'confirm': {
+                    label: 'Yes',
+                    className: 'btn-danger margin-right-5'
+                }
+            },
+            callback: function (result) {
+                debugger;
+                var baseURL = baseurl + 'Account/franchiseeApprove';
+                if (result) {
+                    var Details = new Object();
+                    Details.Id = id;
+                    Details.IsApproved = false;
+                    $.ajax({
+                        url: baseURL,
+                        headers: {
+                        "Authorization": "Bearer " + token
+                        },
+                        type: 'POST',
+                        data: (Details),
+                        dataType: 'json',
+                        success: function (result) {
+                            debugger;
+                            //$("#divLoader").hide();
+                            if (result.message == "Update Successfully") {
+                                toastr.options.onHidden = function () { window.location.href = "@Url.Action("Index", "Admin")"; }
+                                toastr.success(result.message);
+                            } else {
+                                //$("#divLoader").hide();
+                                toastr.error(result.message);
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    function ActiveData(id) {
+        debugger;
+        var userId = parseInt(id);
+        bootbox.confirm({
+            title: "<span style='font-weight:600; text-align: center'>Active Franchisee</span>",
+            message: 'Are you sure want to Approve this Franchisee?',
+            buttons: {
+                'cancel': {
+                    label: 'No',
+                    className: 'btn-default pull-right'
+                },
+                'confirm': {
+                    label: 'Yes',
+                    className: 'btn-danger margin-right-5'
+                }
+            },
+            callback: function (result) {
+                debugger;
+                //$("#divLoader").show();
+                var baseURL = baseurl + 'Account/franchiseeApprove';
+                if (result) {
+                    var Details = new Object();
+                    Details.Id = userId;
+                    Details.IsApproved = true;
+                    //var Obj = {
+                    //    Id: userId,
+                    //    obj:IsApproved = true
+                    //};
+
+                    $.ajax({
+                        url: baseURL,
+                        headers: {
+                        "Authorization": "Bearer " + token
+                        },
+                        type: 'POST',
+                        data: (Details),
+                         dataType: 'json',
+                        success: function (result) {
+                            //$('#divLoader').hide();
+                            debugger;
+                           if (result.message == "Update Successfully") {
+                                toastr.options.onHidden = function () { window.location.href = "@Url.Action("Index", "Admin")"; }
+                                toastr.success(result.message);
+                            } else {
+                                //$("#divLoader").hide();
+                                toastr.error(result.message);
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+</script>
+
+
+

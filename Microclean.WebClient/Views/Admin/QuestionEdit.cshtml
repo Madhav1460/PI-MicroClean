@@ -1,0 +1,161 @@
+﻿
+@{
+    ViewData["Title"] = "QuestionEdit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script src="~/ServiceScript/BaseUrl.js"></script>
+<style>
+    .textareaeditor {
+        width: 100%;
+        height: 200px;
+        font-size: 14px;
+        line-height: 18px;
+        border: 1px solid #dddddd;
+        padding: 10px;
+    }
+</style>
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header bread">
+        <div class="container-fluid">
+            <div class="row mb-2 top-title">
+                <div class="col-sm-9">
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content ">
+        <div class="container-fluid ">
+            <div class="row ">
+                <div class="col-12 ">
+                    <div class="card card-primary outer-row">
+                        <div class="card-header mycolor">
+                            <h3 class="card-title">Update Question Form</h3>
+                        </div>
+                        <!-- /.card-header 1st section -->
+                        <div class="card-body myform">
+                            <input type="hidden" id="hdnQuestionId" name="hdnQuestionId" value="" />
+                            <input type="hidden" id="hdnOptionLength" name="hdnOptionLength" value="" />
+                            <div class="row">
+                                <div class="col-sm-4 col-6">
+                                    <div class="form-group">
+                                        <label>Category</label>
+                                        <select id="ddlCategoryId" name="CategoryId" data-val="true" data-val-required="Category is required." class="form-control select2">
+                                          
+                                        </select>
+                                        <span id="errorcategory" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-6">
+                                    <div class="form-group">
+                                        <label>Answer Duration(Sec)</label>
+                                        <select id="ddlduration" name="DurationId" data-val="true" data-val-required="Duration is required." data-option="" class="form-control select2">
+                                            <option value="1">15</option>
+                                            <option value="2">30</option>
+                                            <option value="3">45</option>
+                                            <option value="4">50</option>
+                                            <option value="5">60</option>
+                                        </select>
+                                        <span id="errortest" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-6">
+                                    <div class="form-group">
+                                        <label>No of option</label>
+                                        <select id="drpnoofoptions" data-val-required="Gread is required." disabled class="form-control select2">
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                        </select>
+                                        <span id="errortest" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body myform">
+                                <div class="row">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div id="questionId">
+                            <div class="question">
+                                <div class="card-body myform">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Questions</label>
+                                                <textarea class="textarea textareaeditor" id="txtquestionid" placeholder="Place some text here"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body myform">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <label>Answers</label>
+                                            <i class="fa fa-question"></i>
+                                            <div id="optoionsdivid">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div id="uploadqId"></div>
+                        <div class="card-body myform">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                </div>
+                                <div class="col-sm-4">
+                                </div>
+                                <div class="col-sm-2 col-6">
+                                    <div class="card-footer mysubmit">
+                                        <button type="button" onclick="openFile();" class="btn btn-primary">Update </button>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2 col-6">
+                                    <div class="card-footer mycancel">
+                                        <button type="button" onclick="cancelUploding();" class="btn btn-outline-warning">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+</div>
+
+<script src="~/theams/plugins/summernote/summernote-bs4.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+@*<script src="~/ServiceScript/onlineQuestion.js"></script>*@
+<script src="~/ServiceScript/questionConfiguration.js"></script>
+<script src="~/ServiceScript/Service.js"></script>
+<script src="~/ServiceScript/Common.js"></script>
+<script type="text/javascript">
+    function AsignValue(count) {
+        $('#ismatchedhdn_' + count + '').val(true);
+    }
+    $(document).ready(function () {
+        $('.textarea').summernote();
+        GetAllTestCategory();
+    });
+
+</script>
+
+

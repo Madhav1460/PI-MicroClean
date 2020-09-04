@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_FranchiseeUserLayout.cshtml";
+}
+    <link href="~/theams/videopopupStyles.css" rel="stylesheet" />
+<style>
+    .txtcolor {
+        color: #b7c900;
+    }
+    #close{
+            display: block;
+    position: absolute;
+    top: 12%;
+    left: 25%;
+    }
+    #videopreview {
+        display: block;
+    position: absolute;
+    top: 13%;
+    left: 25%;
+    }
+</style>
+<script src="~/theams/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+    window.oncontextmenu = function () {
+        return false;
+    }
+    $(document).keydown(function (event) {
+        if (event.keyCode == 123) {
+            return false;
+        }
+        else if ((event.ctrlKey && event.shiftKey && event.keyCode == 73) || (event.ctrlKey && event.shiftKey && event.keyCode == 74)) {
+            return false;
+        }
+        if (event.ctrlKey && event.shiftKey && event.keyCode == 'J'.charCodeAt(0))
+            return false;
+
+        if (event.ctrlKey && event.shiftKey && event.keyCode == 'I'.charCodeAt(0))
+            return false;
+
+        if (event.ctrlKey && event.keyCode == 'j'.charCodeAt(0))
+            return false;
+
+        if (event.ctrlKey && event.keyCode == 'u'.charCodeAt(0))
+            return false;
+
+        if (event.ctrlKey && event.keyCode == 'U'.charCodeAt(0))
+            return false;
+    });
+</script>
+
+<section id="ourvideos">
+    <div class="container mybg">
+        <div class="video_scroll">
+            <div class="row col-space" id="dvid">
+
+            </div>
+        </div>
+    </div>
+</section>
+<div id="loadvideodata" class="row col-space"></div>
+<div id="vid" class="popup" style="text-align:center;">
+    <span id="frame"></span>
+    <a href="#"><h3 id="close">X</h3></a>
+</div>
+<script src="~/ServiceScript/BaseUrl.js"></script>
+<script src="~/theams/plugins/jquery/jquery.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="~/ServiceScript/userAccountService.js"></script>
+<script src="~/ServiceScript/Service.js"></script>
+<script src="~/theams/dist/js/DatimePicker/jquery.simple-dtpicker.js"></script>
+<script src="~/ServiceScript/BaseUrl.js"></script>
+
+<script src="~/ServiceScript/FranchiseeTraining.js"></script>

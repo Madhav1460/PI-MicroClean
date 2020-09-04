@@ -1,0 +1,140 @@
+﻿
+@{
+    ViewData["Title"] = "TestDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script src="~/theams/plugins/jquery/jquery.min.js"></script>
+<link rel="stylesheet" href="~/theams/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="~/theams/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+<link href="~/theams/videopopupStyles.css" rel="stylesheet" />
+<script>
+    $(document).ready(function () {
+        researchData();
+    });
+</script>
+<style>
+    div.dataTables_wrapper div.dataTables_length select {
+        width: 58px !important;
+        display: inline-block;
+    }
+</style>
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header bread">
+        <div class="container-fluid">
+            <div class="row mb-2 top-title">
+                <div class="col-sm-9">
+
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section id="myselection">
+        <div class="container-fluid mycenter">
+            <div class="row">
+                <div class="col-md-3 col-6">
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="ddlCategoryId" name="CategoryId" data-val="true" data-val-required="Category is required." class="form-control select2">
+                        </select>
+                        <span id="errorcategory" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="sbutton">
+                        <button type="button" onclick="researchData();" class="btn btn-block btn-primary">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card card-primary outer-row">
+                        <div class="card-body myform">
+                            <!-- /.card-header 1st section -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                        <table id="testdetailtable" class="table table-bordered table-striped tblbackground dataTable dtr-inline" role="grid">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Test</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="loadtestdata"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+    </section>
+</div>
+<div class="modal fade" id="datamodel">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Users</h4>
+                <button type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id='studendata'>
+                    
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button"
+                        class="btn btn-default"
+                        data-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" id="btnSubmit" onclick="saveUserVideoMappigdata(this);" class="btn btn-primary">
+                    Save changes
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<link rel="stylesheet" href="~/theams/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="~/theams/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+<script src="~/theams/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/theams/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/theams/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="~/theams/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="~/ServiceScript/BaseUrl.js"></script>
+<script src="~/ServiceScript/Service.js"></script>
+<script src="~/ServiceScript/TestConfigure.js"></script>
+<script src="~/ServiceScript/Common.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js" crossorigin="anonymous"></script>
+<script src="~/theams/Toaster/ToasterJS/toastr.js"></script>
+
+
+
+

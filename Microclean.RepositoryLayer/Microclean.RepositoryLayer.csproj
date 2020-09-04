@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Microclean.CommandQueryLayer\Microclean.CommandQueryLayer.csproj" />
+    <ProjectReference Include="..\Microclean.DataAccessLayer\Microclean.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\Microclean.DataModel\Microclean.DataModel.csproj" />
+    <ProjectReference Include="..\Utilities\Utilities.csproj" />
+  </ItemGroup>
+
+</Project>

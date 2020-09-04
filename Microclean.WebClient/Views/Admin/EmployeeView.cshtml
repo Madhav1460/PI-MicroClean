@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewData["Title"] = "EmployeeView";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link href="~/theams/custom-loder.css" rel="stylesheet" />
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header bread">
+        <div class="container-fluid">
+            <div class="row mb-2 top-title">
+                <div class="col-sm-9">
+                    <h4>Employee View</h4>
+                </div>
+                <div class="col-sm-3">
+                    <a href="/Admin/EmployeeList" role="button" class="btn btn-warning">Cancel</a>
+                    <a href="/Admin/EditEmployee" role="button" class="btn btn-success pull-right"><i class="fa fa-pencil"></i> Update Franchisee</a>
+                </div>
+            </div>
+
+        </div><!-- /.container-fluid -->
+
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div id="overlay1">
+            <p style="position: absolute; color: White; top: 50%; left: 45%;">
+                Loading, please wait...
+                <img src="~/Images/ajax-loader4.gif" alt="Loader" style="width:105px;height:76px" />
+            </p>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header p-2">
+                            <ul class="nav nav-pills">
+                                <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">User Information</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Personal Information</a></li>
+                            </ul>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body card-primary outer-row">
+                            <div class="tab-content">
+                                <div class="active tab-pane" id="activity">
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        @*<input type="hidden" id="hdnId" value="6" />*@
+                                        <strong><i class="fas fa-user"></i> Name</strong>
+                                        <p class="text-muted" id="fullName"></p>
+                                        <hr>
+                                        <strong><i class="fas fa fa-envelope mr-1"></i> Email</strong>
+                                        <p class="text-muted" id="email"></p>
+                                        <hr>
+                                        <strong><i class="fas fa-phone-alt mr-1"></i> Phone No.</strong>
+                                        <p class="text-muted" id="phoneno"></p>
+                                        <hr>
+                                        <strong><i class="fas fa fa-envelope mr-1"></i> Address</strong>
+                                        <p class="text-muted" id="address"></p>
+                                        <strong><i class="fas fa fa-envelope mr-1"></i> Pin Code</strong>
+                                        <p class="text-muted" id="pincode"></p>
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+
+                                <div class="tab-pane" id="timeline">
+                                    <div class="card-body">
+                                        <strong><i class="fas fa fa-envelope mr-1"></i> Alternate Email</strong>
+                                        <p class="text-muted" id="alternate_email"></p>
+                                        <hr>
+                                        <strong><i class="fas fa-phone-alt mr-1"></i> Altername Phone No.</strong>
+                                        <p class="text-muted" id="alternate_phoneno"></p>
+                                        <hr>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- /.tab-content -->
+
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.nav-tabs-custom -->
+                </div> 
+                
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<script src="~/ServiceScript/BaseUrl.js"></script>
+<script src="~/theams/plugins/jquery/jquery.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="~/ServiceScript/Service.js"></script>
+<script src="~/ServiceScript/AdminEmployeeManagment.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        getEmployeeView();
+    });
+  
+</script>
+
+
+
+

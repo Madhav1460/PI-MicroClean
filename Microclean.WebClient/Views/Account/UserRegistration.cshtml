@@ -1,0 +1,215 @@
+﻿@{
+    ViewData["Title"] = "UserRegistration";
+    Layout = "~/Views/Shared/_NewUserRegistrationLayout.cshtml";
+}
+
+<style>
+    .error {
+        color: red;
+        width: 100%;
+        margin-bottom: 0px;
+    }
+
+    .disabled {
+        border-color: red;
+        background: gray;
+    }
+
+    input[type=checkbox].disabled {
+        outline: 2px solid red;
+    }
+
+    .red_border {
+        border-color: red !important;
+    }
+
+    .login-card-body .input-group .form-control, .register-card-body .input-group .form-control {
+        border-right: 1px solid #ced4da;
+    }
+</style>
+
+<link href="~/theams/custom-loder.css" rel="stylesheet" />
+
+<div class="container">
+    <form role="form" data-toggle="validator" id="quickForm">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div id="overlay1">
+                    <p style="position: absolute; color: White; top: 50%; left: 45%;">
+                        Loading, please wait...
+                        <img src="~/Images/ajax-loader4.gif" alt="Loader" style="width:105px;height:76px" />
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-body register-card-body">
+                        <p class="login-box-msg mregister"><b>Register a New Membership</b></p>
+
+                        <div class="row onerow">
+                            <div class="col-md-4 onecol">
+                                <div class="input-group mb-3">
+                                    @*<input id="txtfrstname" type="text" class="form-control required" placeholder="First name" required>*@
+                                    <input type="text" autocomplete="rutjfkde" class="form-control required onlyChar" id="txtFirstName" placeholder="First name">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-user"></span>
+                                        </div>
+                                    </div>
+                                    <span style="color:red; margin-top: -7px;">*</span>
+                                    <span class="error" id="error_firstname" style="display: none;margin-top: -4px;"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 secondcol">
+                                <div class="input-group mb-3">
+                                    @*<input id="txtmiddlename" type="text" class="form-control" placeholder="Middle name">*@
+                                    <input type="text" class="form-control onlyChar" autocomplete="rutjfkde" id="txtMiddleName" placeholder="Middle name">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-user"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 secondcol">
+                                <div class="input-group mb-3">
+                                    <input type="text" autocomplete="rutjfkde" class="form-control required onlyChar" id="txtLastName" placeholder="Last name">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-user"></span>
+                                        </div>
+                                    </div>
+                                    <span style="color:red; margin-top: -7px;">*</span>
+                                    <span class="error" id="error_lastname" style="display: none;margin-top: -4px;"></span>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            @*<input type="email" id="txtemail" class="form-control required" placeholder="Email" onblur="validateEmail(this)">*@
+                            <input type="text" autocomplete="rutjfkde" class="form-control required validateEmail email" placeholder="Email" id="txtEmail">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                            <span style="color:red; margin-top: -7px;">*</span>
+                            <span class="error" id="error_email" style="display: none; margin-top: -4px;"></span>
+                        </div>
+                        <div class="input-group mb-3">
+                            @*<input type="text" id="txtphone" class="form-control required" placeholder="Phone" maxlength="10" onkeypress="return isNumberKey(event);" onkeyup="check(); return false;">*@
+                            <input type="text" autocomplete="rutjfkde" class="form-control required phonedigit onlyDigit" id="txtPhone" placeholder="Phone No" maxlength="10" title="10-digits" onkeypress="return isNumberKey(event);">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fa fa-phone"></span>
+                                </div>
+                            </div>
+                            <span style="color:red; margin-top: -7px;">*</span>
+                            <span id="errorPhoneMsg" class="error" style="display: none;margin-top: -4px;"></span>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control companyNameRequire" autocomplete="rutjfkde" placeholder="Company Name" id="txtCompanyName">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fa fa-building"></span>
+                                </div>
+                            </div>
+                            <span style="color:red; margin-top: -7px;">*</span>
+                            <span class="error" id="error_companyname" style="display: none;margin-top: -4px;"></span>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="password" class="form-control required pwdmath" placeholder="Enter Password" autocomplete="new-password" id="txtPassword">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                            <span style="color:red; margin-top: -7px;">*</span>
+                            <span class="error" id="error_password" style="display:none;margin-top: -4px;"></span>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="password" autocomplete="rutjfkde" class="form-control required pwdmath" placeholder="Enter Confirm Password" id="txtreinterpassword">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                            <span style="color:red; margin-top: -7px;">*</span>
+                            <span class="error" id="error_confirm_password" style="display:none;margin-top: -4px;"></span>
+                        </div>
+                        <div class="row onerow">
+                            <div class="col-md-4 onecol">
+                                <div class="input-group mb-3">
+                                    @*<select class="form-control" id="ddlState"></select>*@
+                                    <select class="form-control" onchange="getdistrictbystateid(this)" id="ddlState"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 secondcol">
+                                <div class="input-group mb-3">
+                                    @*<select class="form-control" id="ddlCity"></select>*@
+                                    <select class="form-control" id="ddldistrictid" onchange="GetCityLocationbyDistrictid(this)"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 secondcol">
+                                <div class="input-group mb-3">
+                                    @*<select class="form-control" id="ddlCity"></select>*@
+                                    <select class="form-control" onchange="GetPincode(this);" id="ddlcitylocation"><option data-option=""></option></select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 secondcol">
+                                <div class="input-group mb-3">
+                                    <input type="text" autocomplete="rutjfkde" class="form-control required pinlength" placeholder="Pincode" id="txtPincode" maxlength="6">
+                                </div>
+                                <span class="error" id="error_pincode" style="display: none;margin-top: -4px;"></span>
+                            </div>
+                            <div class="col-md-8 secondcol">
+                                <div class="input-group mb-3">
+                                    @*<textarea class="form-control required1" id="txtAddress" placeholder="Address" cols="3" rows="1"></textarea>*@
+                                    <textarea class="form-control required fullAddress" autocomplete="rutjfkde" id="txtAddress" cols="3" rows="2"></textarea>
+                                    <span class="error" id="error_fullAddress" style="display: none;margin-top: -4px;"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="icheck-primary">
+                                    <input type="checkbox" class="notnull disabled" id="confirm" name="terms" value="agree">
+                                    <label for="confirm">
+                                        I agree to the <a href="#">terms</a>
+                                    </label>
+                                    <span style="color:red; margin-top: -7px;">*</span>
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-4">
+                                <button type="button" onclick="franchiseeItSelfRegistration();" id="btnsubmit" style="position: absolute;" class="btn btn-primary btn-block notnull btnvalid" disabled>Register</button>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <div class="social-auth-links text-center">
+                            <p>- OR -</p>
+                            <a href="#" class="btn btn-block btn-primary">
+                                <i class="fab fa-facebook mr-2"></i>
+                                Sign up using Facebook
+                            </a>
+                            <a href="#" class="btn btn-block btn-danger">
+                                <i class="fab fa-google-plus mr-2"></i>
+                                Sign up using Google+
+                            </a>
+                        </div>
+
+                        <a href="/Account/Login" class="text-center">I already have a membership</a>
+                    </div>
+                    <!-- /.form-box -->
+                </div><!-- /.card -->
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </form>
+</div>
+<script src="~/ServiceScript/BaseUrl.js"></script>
+<script src="~/theams/plugins/jquery/jquery.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="~/ServiceScript/Service.js"></script>
+<script src="~/ServiceScript/Common.js"></script>
+<script src="~/ServiceScript/Validation/CommonValidation.js"></script>
+<script src="~/ServiceScript/userSelfRregistration.js"></script>

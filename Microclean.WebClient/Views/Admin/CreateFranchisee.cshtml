@@ -1,0 +1,546 @@
+﻿
+@{
+    ViewData["Title"] = "CreateFranchisee";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .nav-pills .nav-link.active, .nav-pills .show > .nav-link
+    .py-5 .nav-fill .nav-item {
+        background-color: #007bff !important;
+        color: white !important;
+    }
+
+    .error {
+        color: red;
+        width: 100%;
+        margin-bottom: 0px;
+    }
+
+    .red_border {
+        border-color: red !important;
+    }
+  
+</style>
+<link href="~/theams/dist/css/DatePicker/jquery.datetimepicker.min.css" rel="stylesheet" />
+<link href="~/theams/custom-loder.css" rel="stylesheet" />
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header bread">
+        <div class="container-fluid">
+            <div class="row mb-2 top-title">
+                <div class="col-sm-6">
+                    <h4>Create Franchisee</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header p-2">
+                            <ul class="nav nav-pills tabs">
+                                <li class="nav-item"><a class="nav-link active" href="#activity" id="presonal_information" onclick="Personal()" style="font-weight:600" data-toggle="tab">Personal Information</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#timeline" id="time_line" style="font-weight:600" onclick="Timeline()" data-toggle="tab">Company Information</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#settings" id="setting" style="font-weight:600" onclick="Commercial()" data-toggle="tab">Commercial Deatails</a></li>
+                            </ul>
+                        </div>
+                        <div id="overlay1">
+                            <p style="position: absolute; color: White; top: 50%; left: 45%;">
+                                Loading, please wait...
+                                <img src="~/Images/ajax-loader4.gif" alt="Loader" style="width:105px;height:76px" />
+                            </p>
+                        </div>
+                        <div class="card-body card-primary outer-row">
+                            <div class="tab-content">
+                                <div class="active tab-pane" id="activity">
+                                    <section class="content">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <form role="form">
+                                                    <input type="hidden" value="1" id="hdnFranchiseeFee" />                                                  
+                                                    <input type="hidden" value="2" id="hdnOtherFee" />                                                    
+                                                    <input type="hidden" value="3" id="hdnFixedMonthlyFee" />                                                   
+                                                    <input type="hidden" value="4" id="hdnThresholdAmount" />
+                                                  
+                                                    <div class="row">
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Company Name</label>
+                                                                <span style="color: red;">*</span>
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" class="form-control companyNameRequire" placeholder="Enter Company Name" id="txtCompanyName">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-building" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                    <span class="error" id="error_companyname" style="display: none;"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>First Name</label>
+                                                                <span style="color: red;">*</span>
+                                                                <div class="input-group mb-3">
+                                                                    @*<input type="text" class="form-control required1" id="txtFirstName" placeholder="Enter First Name">*@
+                                                                    <input type="text" autocomplete="rutjfkde" class="form-control required onlyChar" id="txtFirstName" placeholder="Enter First Name">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                                                    </div>
+                                                                    <span class="error" id="error_firstname" style="display: none;"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Middle Name</label>
+                                                                <div class="input-group mb-3">
+                                                                    @*<input type="text" class="form-control" id="txtMiddleName" placeholder="Enter Middle Name">*@
+                                                                    <input type="text" class="form-control onlyChar" autocomplete="rutjfkde" id="txtMiddleName" placeholder="Enter Middle Name">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>                                                      
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Last Name</label>
+                                                                <span style="color: red;">*</span>
+                                                                <div class="input-group mb-3">
+                                                                    @*<input type="text" class="form-control required1" id="txtLastName" placeholder="Enter Last name">*@
+                                                                    <input type="text" autocomplete="rutjfkde" class="form-control required onlyChar" id="txtLastName" placeholder="Enter Last name">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                                                    </div>
+                                                                    <span class="error" id="error_lastname" style="display: none;"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Email</label>
+                                                                <span style="color: red;">*</span>
+                                                                <div class="input-group mb-3">
+                                                                    @*<input type="email" class="form-control required1" placeholder="Enter Email" id="txtEmail" autocomplete="off" onblur="validateEmail(this)" >*@
+                                                                    <input type="text" autocomplete="rutjfkde" class="form-control required validateEmail email" placeholder="Enter Email" id="txtEmail">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                                                    </div>
+                                                                    @*<span class="error" id="error_email" style="display: none;"></span>
+                                                                      <span class="error" id="error_existemail" style="display: none;"></span>*@
+                                                                    <span class="error" id="error_email" style="display: none;"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Password</label>
+                                                                <span style="color: red;">*</span>
+                                                                <div class="input-group mb-3">
+                                                                    @*<input type="password" class="form-control required1" placeholder="Enter Password" id="txtpassword" autocomplete="new-password" onblur="validatePassword(this);">*@
+                                                                    <input type="password" class="form-control required pwdmath" placeholder="Enter Password" autocomplete="new-password" id="txtPassword">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                                                    </div>
+                                                                    <span class="error" id="error_password" style="display:none;"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>                                                        
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Confirm Password</label>
+                                                                <span style="color: red;">*</span>
+                                                                <div class="input-group mb-3">
+                                                                    @*<input type="password" class="form-control required1" placeholder="Enter Confirm Password" id="txtreinterpassword" onblur="validatePassword(this);">*@
+                                                                    <input type="password" autocomplete="rutjfkde" class="form-control required pwdmath" placeholder="Enter Confirm Password" id="txtreinterpassword">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                                                    </div>
+                                                                    <span class="error" id="error_confirm_password" style="display:none;"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Phone no.</label>
+                                                                <span style="color: red;">*</span>
+                                                                <div class="input-group mb-3">
+                                                                    @*<input type="text" class="form-control required1" id="txtPhone" placeholder="Enter Phone No" maxlength="10" onkeypress="return isNumberKey(event);">*@
+                                                                    <input type="text" autocomplete="rutjfkde" class="form-control required phonedigit onlyDigit" id="txtPhone" placeholder="Enter Phone No" maxlength="10" title="10-digits" onkeypress="return isNumberKey(event);">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                                                    </div>
+                                                                    <span id="errorPhoneMsg" class="error" style="display: none;"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Alternate Email</label>
+                                                                <div class="input-group mb-3">
+                                                                    @*<input type="email" class="form-control" placeholder="Enter Alternate Email" id="txtAlternateEmail" onblur="validateAlternameEmail(this)">*@
+                                                                    <input type="text" autocomplete="rutjfkde" class="form-control validateAlternateEmail" placeholder="Enter Alternate Email" id="txtAlternateEmail" >
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                                                    </div>
+                                                                    <span class="error" id="error_alteremail" style="display: none;"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>                                                       
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Alternate No</label>
+                                                                <div class="input-group mb-3">
+                                                                    @*<input type="text" class="form-control" placeholder="Enter Alternate No" id="txtAlternateNumber" maxlength="10" onkeypress="return isNumberKey(event);" onchange="lentestaltno()" title="10-digits">*@
+                                                                    <input type="text" autocomplete="rutjfkde" class="form-control alternate-phonedigit" placeholder="Enter Alternate No" id="txtAlternateNumber" maxlength="10" onkeypress="return isNumberKey(event);" title="10-digits">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                                                    </div>
+                                                                    <span id="errorAlternatePhoneMsg" class="error" style="display: none;"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>State</label>
+                                                                @*<span style="color: red;">*</span>*@
+                                                                <div class="input-group mb-3">
+                                                                    <select class="form-control" onchange="getdistrictbystateid(this)" id="ddlState"></select>
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>District</label>
+                                                                @*<span style="color: red;">*</span>*@
+                                                                <div class="input-group mb-3">
+                                                                    <select class="form-control" id="ddldistrictid" onchange="GetCityLocationbyDistrictid(this)"></select>
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>                                                       
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>City/Location</label>
+                                                                @*<span style="color: red;">*</span>*@
+                                                                <div class="input-group mb-3">
+                                                                    <select class="form-control" onchange="GetPincode(this);" id="ddlcitylocation"><option data-option=""></option></select>
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Pincode</label>
+                                                                <span style="color: red;">*</span>
+                                                            <div class="input-group mb-3">
+                                                                @*<input type="text" class="form-control" placeholder="Enter Pincode" id="txtPincode" maxlength="6" onkeypress="return isNumberKey(event);" >*@
+                                                                <input type="text" autocomplete="rutjfkde" class="form-control required pinlength" placeholder="Enter Pincode" id="txtPincode" maxlength="6">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                                                                </div>
+                                                                <span class="error" id="error_pincode" style="display: none;"></span>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Address</label>
+                                                                <span style="color: red;">*</span>
+                                                            <div class="input-group mb-3">
+                                                                @*<textarea class="form-control" id="txtAddress" rows="2"></textarea>*@
+                                                                <textarea class="form-control required fullAddress" autocomplete="rutjfkde" id="txtAddress" rows="2"></textarea>
+                                                                <span class="error" id="error_fullAddress" style="display: none;"></span>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="card-footer register_membership">
+                                                                <button type="button" onclick="saveFirstSteap()" class="btn btn-primary btnvalid">Save</button>
+                                                                <button type="button" onclick="FirstSteap()" id="btnCreate" class="btn btn-secondary">Next</button>
+                                                                @*<button type="button" onclick="saveFirstSteap();" class="btn btn-danger">Cancel</button>*@
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div class="tab-pane" id="timeline">
+                                    <section class="content">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <form role="form">
+                                                    <div class="row">
+                                                        <input type="hidden" id="hdnlatestCompanyId" value="1" />
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Company Email</label>
+                                                                @*<span style="color: red;">*</span>*@
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" class="form-control validateCompanyEmail" autocomplete="rutjfkde" placeholder="Enter Company Email" id="txtCompanyEmail">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                    <span class="error" id="error_companyemail" style="display: none;"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Company Phone No</label>
+                                                                @*<span style="color: red;">*</span>*@
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" class="form-control company-phonedigit" autocomplete="rutjfkde" placeholder="Enter Phone No" maxlength="10" id="txtCompanyPhoneno" onkeypress="return isNumberKey(event);">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                    <span class="error" id="error_CompanyPhoneMsg" style="display: none;"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <input type="hidden" id="hdnAddressId" />
+                                                                <label>State</label>
+                                                                @*<span style="color: red;">*</span>*@
+                                                                <div class="input-group mb-3">
+                                                                    <select class="form-control ddlStateClient" onchange="getdistrictbystateidClient(this)" id="ddlStateClient"></select>
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>District</label>
+                                                                @*<span style="color: red;">*</span>*@
+                                                                <div class="input-group mb-3">
+                                                                    <select class="form-control" id="ddldistrictidClient" onchange="GetCityLocationbyDistrictidClient(this)"></select>
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>City/Location</label>
+                                                                @*<span style="color: red;">*</span>*@
+                                                                <div class="input-group mb-3">
+                                                                    <select class="form-control" onchange="GetPincodeClient(this);" id="ddlcitylocationClient"></select>
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Pincode</label>
+                                                                @*<span style="color: red;">*</span>*@
+                                                            <div class="input-group mb-3">
+                                                                <input type="text" class="form-control compy-pinlength" autocomplete="rutjfkde" placeholder="Enter Pincode" id="txtCompanyPincode" maxlength="6" onkeypress="return isNumberKey(event);">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                                                                </div>
+                                                                <span class="error" id="error_companypincode" style="display: none;"></span>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">   
+                                                        <div class="col-sm-8 col-12">
+                                                            <div class="form-group">
+                                                                <label>Company Address</label>
+                                                                @*<span style="color: red;">*</span>*@
+                                                                <div class="input-group mb-3">
+                                                                    <textarea class="form-control" autocomplete="rutjfkde" id="txtcompanyAddress" rows="3"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="card-footer register_membership">
+                                                                <button type="button" onclick="saveSecondSteap();" id="btnSave" class="btn btn-primary btnvalid">Save</button>
+                                                                <button type="button" onclick="SecondSteap();" id="btnSavestep" class="btn btn-secondary">Next</button>
+                                                                <button type="button" onclick="backTofirstSteap();" class="btn btn-danger">Back</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>                                                
+                                            </div>
+                                        </div>
+
+                                    </section>
+                                </div>
+                              
+                                <div class="tab-pane" id="settings">
+                                    <section class="content">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <form role="form">
+                                                    <div class="row">
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Franchisee Fee</label>@*<span style="color: red;">*</span>*@
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" autocomplete="rutjfkde" class="form-control summition onlyInt" placeholder="Enter Franchisee Fee" id="txtFranchiseeFee">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-inr" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Other Fee</label>@*<span style="color: red;">*</span>*@
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" autocomplete="rutjfkde" class="form-control summition onlyInt" placeholder="Enter Other Fee" id="txtOtherFee">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-inr" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Total Fee</label>@*<span style="color: red;">*</span>*@
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" autocomplete="rutjfkde"class="form-control summitiontotal" readonly="readonly" placeholder="Enter Total Fee" id="txtTotalFee">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-inr" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Monthly Fixed Fee</label>@*<span style="color: red;">*</span>*@
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" autocomplete="rutjfkde" class="form-control onlyInt" placeholder="Enter Monthly Fixed Fee" id="txtMonthlyFixedFee">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-inr" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Minimum Threshold Due Amount</label>@*<span style="color: red;">*</span>*@
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" autocomplete="rutjfkde" class="form-control onlyInt" placeholder="Enter Threshold Due Amount" id="txtMinimumThresholdDueAmount">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-inr" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                     
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Payment Due Date</label>@*<span style="color: red;">*</span>*@
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" autocomplete="rutjfkde" class="form-control" placeholder="Enter Payment Terms" id="txtPaymentDueDate">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-8 col-12">
+                                                            <div class="form-group">
+                                                                <label>Payment Terms</label>@*<span style="color: red;">*</span>*@
+                                                                <div class="input-group mb-3">
+                                                                    <textarea class="form-control" autocomplete="rutjfkde" id="txtPaymentTerms" placeholder="Enter Payment Terms" rows="3"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="card-footer register_membership">
+                                                                <button type="button" onclick="savefinalSteap();" id="btnUpdate" class="btn btn-primary btnvalid">Save</button>
+                                                                <button type="button" onclick="backToSecondSteap();" class="btn btn-danger">Back</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                            <!-- /.tab-content -->
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.nav-tabs-custom -->
+                </div>
+                <!-- /.col -->
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<script src="~/ServiceScript/BaseUrl.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="~/ServiceScript/userAccountService.js"></script>
+<script src="~/ServiceScript/Service.js"></script>
+<script src="~/ServiceScript/Common.js"></script>
+<script src="~/ServiceScript/Validation/CommonValidation.js"></script>
+<script src="~/ServiceScript/createFranchiseeByAdmin.js"></script>
+<script src="~/theams/dist/js/DatimePicker/jquery.datetimepicker.js"></script>
+<script src="~/ServiceScript/feeValidation.js"></script>
+
+<script type="text/javascript">
+     $(document).ready(function () {
+        GetAllState();
+        GetAllStateClient();
+        EnableDigitValidation();
+    });
+
+    $('#txtPaymentDueDate').datetimepicker({
+        timepicker: false,
+        minDate: 0,
+        format: 'd/m/yy',       
+    });
+</script>

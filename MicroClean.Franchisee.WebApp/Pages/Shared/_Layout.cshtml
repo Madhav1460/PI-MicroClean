@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MicroClean.Franchisee.WebApp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Awesome -->
+    <link href="~/theams/plugins/fontawesome-free/css/all.css" rel="stylesheet" />
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!--- data table CSS----->
+    <link href="~/theams/plugins/datatables-bs4/css/dataTables.bootstrap4.css" rel="stylesheet" />
+    <link href="~/theams/plugins/datatables-responsive/css/responsive.bootstrap4.css" rel="stylesheet" />
+    <!-- Theme style -->
+    <link href="~/theams/dist/css/adminlte.min.css" rel="stylesheet" />
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!--custome CSS-->
+    <link href="~/theams/microstyle.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    @*<script src="../../plugins/jquery/jquery.min.js"></script>*@
+    <script src="~/theams/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    @*<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>*@
+    <script src="~/theams/plugins/bootstrap/js/bootstrap.bundle.js"></script>
+    <!-- AdminLTE App -->
+    @*<script src="../../dist/js/adminlte.min.js"></script>*@
+    <script src="~/theams/dist/js/adminlte.min.js"></script>
+</head>
+
+<body class="hold-transition">
+       <section id="header-style">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-7 col-sm-6 col-lg-3 left">
+                    <div class="logo-img"><img src="~/Images/micro-clean.jpeg" /></div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-lg-9 right">
+                    @*<nav class="navbar navbar-expand-sm bg-light text-center">
+                        <ul class="navbar-nav">                         
+                            <li class="nav-item dropdown menu-position">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-bars"></i>
+                                </a>
+                              
+                            </li>
+                        </ul>
+                    </nav>*@
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <section id="menu-style">
+        <div class="container">
+            <div class="row menu-row">
+            </div>
+        </div>
+    </section>
+
+    <section class="content container-fluid">
+        <!--------------------------
+          | Your Page Content Here |
+        -------------------------->
+        @RenderBody()
+    </section>
+    <!-- /.content -->
+
+    <section id="footer-style">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4 text-center">
+                    <div class="social_icon">
+                        <ul>
+                            <li><a target="_blank" href="#"><i class="fa fa-youtube"></i></a></li>
+                            <li><a target="_blank" href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a target="_blank" href="#"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="copyright">
+                        © 2019 <a title="Pi Infotech" target="_blank" href="https://www.pi-infotech.com/">Pi Infotech</a>. All Rights Reserved.
+                    </div>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+        </div>
+    </section>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

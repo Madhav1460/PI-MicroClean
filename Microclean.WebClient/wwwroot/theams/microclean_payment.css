@@ -1,0 +1,18 @@
+﻿.modal-content {
+    width: 110%;
+}
+
+.error {
+    color: red;
+    width: 100%;
+    margin-bottom: 0px;
+}
+
+.red_border {
+    border-color: red !important;
+}
+.star {
+    float: left;
+    color: #f00;
+    font-size: 15px;
+}

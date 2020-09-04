@@ -1,0 +1,237 @@
+﻿
+@{
+    ViewData["Title"] = "GetUserDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/theams/custom-loder.css" rel="stylesheet" />
+<div class="content-wrapper">
+    <div id="overlay1">
+        <p style="position: absolute; color: White; top: 50%; left: 45%;">
+            Loading, please wait...
+            <img src="~/Images/ajax-loader4.gif" alt="Loader" style="width:105px;height:76px" />
+        </p>
+    </div>
+    <section class="content-header bread">
+        <div class="container-fluid">
+            <div class="row mb-2 top-title">
+                <div class="col-sm-9">
+                    <h4>My Profile</h4>
+                </div>
+                <div class="col-sm-3">
+                    <a href="/Account/UserUpdate" role="button" class="btn btn-success pull-right">Update Profile</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header p-2">
+                            <ul class="nav nav-pills">
+                                <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">User Information</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Company Information</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Documents Information</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#feestructure" data-toggle="tab">Fee Infomation</a></li>
+                                @*<li class="nav-item"><a class="nav-link" href="#useraddresstab" data-toggle="tab">Address Information</a></li>*@
+                                <li class="nav-item"><a class="nav-link" href="#allocatedsupervisortab" data-toggle="tab">Assigned Supervisor</a></li>
+                            </ul>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body card-primary outer-row">
+                            <div class="tab-content">
+                                <div class="active tab-pane" id="activity">
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <strong><i class="fas fa-user"></i>Name</strong>
+                                        <p class="text-muted" id="fullName"></p>
+                                        <hr>
+
+                                        <strong><i class="fas fa fa-envelope mr-1"></i> Email</strong>
+                                        <p class="text-muted" id="email"></p>
+                                        <hr>
+                                        <strong><i class="fas fa-phone-alt mr-1"></i> Phone No.</strong>
+                                        <p class="text-muted" id="phoneno"></p>
+                                        <hr>
+                                        <strong><i class="fas fa fa-envelope mr-1"></i> Alternate Email</strong>
+                                        <p class="text-muted" id="alternate_email"></p>
+                                        <hr>
+                                        <strong><i class="fas fa-phone-alt mr-1"></i> Alternate Phone No.</strong>
+                                        <p class="text-muted" id="alternate_phoneno"></p>
+                                        <hr>
+                                        <strong><i class="fas fa-location-arrow"></i> Address</strong>
+                                        <p class="text-muted" id="address"></p>
+                                        <hr>
+                                        <strong><i class="fas fa-location-arrow"></i> Pincode</strong>
+                                        <p class="text-muted" id="pincode"></p>
+                                        <hr>
+                                        <strong><i class="fas fa-user"></i> User Adhar Card No</strong>
+                                        <p class="text-muted" id="oAdharNo"></p>
+                                        <hr>
+                                        <strong><i class="fas fa-user"></i>User PAN Card No</strong>
+                                        <p class="text-muted" id="oPanNo"></p>
+                                        <hr>
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+
+                                <div class="tab-pane" id="timeline">
+                                    <div class="card-body">
+                                        <strong><i class="fas fa fa-building mr-1"></i> Company Name</strong>
+                                        <p class="text-muted" id="txtCompanyName"></p>
+                                        <hr>
+                                        <strong><i class="fas fa-envelope"></i> Company Email</strong>
+                                        <p class="text-muted" id="txtCompanyEmail"></p>
+                                        <hr>
+                                        <strong><i class="fas fa-phone-alt mr-1"></i> Company Phone No.</strong>
+                                        <p class="text-muted" id="txtCompanyPhoneNo"></p>
+                                        <hr>
+                                        <strong><i class="fas fa-map-marker"></i> Company Address</strong>
+                                        <p class="text-muted" id="txtCompanyAddress"></p>
+                                        <hr>
+                                        <strong><i class="fas fa-map-marker"></i> Company Pincode</strong>
+                                        <p class="text-muted" id="txtCompanyPincode"></p>
+                                        <hr>
+                                        <strong><i class="fas fa-envelope"></i> Company PAN Card No</strong>
+                                        <p class="text-muted" id="txtPANCardNo"></p>
+                                        <hr>
+                                        <strong><i class="fas fa-envelope"></i> Company GSTNo</strong>
+                                        <p class="text-muted" id="txtCompanyGSTNo"></p>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane" id="settings">
+                                    <div class="card-body" id="docdivid">
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="feestructure">
+                                    <div class="card-body" id="feedvid">
+
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="useraddresstab">
+                                    <div class="card-body" id="postaldivid">
+
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="allocatedsupervisortab">
+                                    <div class="card-body" id="supervisordivid">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.tab-content -->
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.nav-tabs-custom -->
+                </div>
+                <!-- /.col -->
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<script src="~/ServiceScript/BaseUrl.js"></script>
+<script src="~/theams/plugins/jquery/jquery.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="~/ServiceScript/userAccountService.js"></script>
+<script src="~/ServiceScript/Service.js"></script>
+<script src="~/theams/dist/js/DatimePicker/jquery.simple-dtpicker.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        debugger;
+        $("#overlay1").show();
+        var url = 'Franchisee/getuserdetailbyId'
+        GetProfile(url).then(data => {
+            debugger;
+            $('#fullName').text(data.data.user.userDetail.fullName);
+            $('#middle_name').text(data.data.user.middleName);
+            $('#last_name').text(data.data.user.lastName);
+            $('#email').text(data.data.user.email);
+            $('#phoneno').text(data.data.user.phoneNumber);
+            $('#alternate_email').text(data.data.user.userDetail.alternateEmail);
+            $('#alternate_phoneno').text(data.data.user.userDetail.alternateNumber);
+            $('#address').text(data.data.user.addresses[0].fullAddress);
+             $('#pincode').text(data.data.user.addresses[0].userZip);
+            $('#txtCompanyName').text(data.data.companyName);
+            $('#txtCompanyEmail').text(data.data.companyEmail);
+            $('#txtCompanyPhoneNo').text(data.data.companyContactNo);
+            $('#txtCompanyAddress').text(data.data.companyAddress);
+            $('#txtCompanyPincode').text(data.data.companyZip);
+            $('#txtPANCardNo').text(data.data.comapnyPAN);
+            $('#txtCompanyGSTNo').text(data.data.companyGSTNo);
+            $('#oAdharNo').text(data.data.user.userDetail.userAdharCardNo);
+            $('#oPanNo').text(data.data.user.userDetail.userPAN);
+            var docinfo = "";
+            var feeinfo = "";
+            var postainfo = "";
+            var supervisorinfo = "";
+            if (data.data.user.userDocument.length > 0) {
+                for (var i = 0; i < data.data.user.userDocument.length; i++) {
+                    docinfo += `<strong><i class="fas fa-file mr-1"></i>` + data.data.user.userDocument[i].documentName + `</strong>
+                                        <p class="text-muted" id="adharcard"> `+ data.data.user.userDocument[i].remark + `</p>
+                                        <input type="hidden" name="docname" id="kycdocnameid_`+ i + `" value="`+data.data.user.userDocument[i].remark+`" />  
+                                        <a href ="#" style="color:blue;cursor: pointer;" id="`+ data.data.user.userDocument[i].docFilePath + `" onclick="dowloaddoument(this,`+i+`);">Download</a>
+                                        <hr>`
+                };
+            }
+            else {
+                docinfo += `<strong><i class="fas fa-id-card mr-1"></i>No Document Details Found!</strong>`
+            }
+            if (data.data.user.feeDetails.length > 0) {
+                for (var i = 0; i < data.data.user.feeDetails.length; i++) {
+                    feeinfo += `<strong><i class="fa fa-money" aria-hidden="true"></i>` + data.data.user.feeDetails[i].feeType + `</strong>
+                                        <p class="text-muted"><i class="fas fa-inr"></i>`+ data.data.user.feeDetails[i].feeValue + `</p>
+                                        <hr>`
+                }
+                feeinfo += `<strong><i class="fa fa-money" aria-hidden="true"></i>Total Amount</strong><p class="text-muted"><i class="fas fa-inr"></i>` + data.data.user.totalFee + `</p>
+                                        <hr>`
+                feeinfo += `<strong><i class="fa fa-money" aria-hidden="true"></i>Payment Terms</strong><p class="text-muted"><i class="fas fa-inr"></i>` + data.data.user.feeDetails[0].paymentTerms + `</p>
+                                        <hr>`
+            } else {
+                feeinfo += `<strong><i class="fas fa-id-card mr-1"></i>No Fee Details Found!</strong>`
+            }
+            if (data.data.user.addresses.length > 0) {
+                for (var i = 0; i < data.data.user.addresses.length; i++) {
+                    postainfo += `<strong><i class="fas fa-map-marker"></i> Owner Address</strong>
+                                <input type="hidden" id="addressid_`+ i + `" value="` + data.data.user.addresses[i].addressId + `" />
+                                        <p class="text-muted" id="txtaddressid_`+ i + `">
+                                                `+ data.data.user.addresses[i].fullAddress + `</p>
+                                        <hr>`
+                }
+            } else {
+                postainfo += `<strong><i class="fas fa-id-card mr-1"></i>No Postal Details Found!</strong>`
+            }
+            if (data.data.user.supervisor != null) {
+                supervisorinfo += `<strong><i class="fas fa-user"></i> Name</strong>
+                                        <p class="text-muted">`+ data.data.user.supervisor.name + `</p><hr>
+                                        <strong><i class="fas fa-envelope"></i> Email</strong>
+                                        <p class="text-muted">`+ data.data.user.supervisor.email + `</p><hr>
+                                        <strong><i class="fas fa-phone"></i> Phone Number</strong>
+                                        <p class="text-muted">`+ data.data.user.supervisor.contactNo + `</p>
+                                        <hr>`
+            }
+            else {supervisorinfo +=`<strong><i class="fas fa-info"></i> No Supervisor Is assigned !</strong>`}
+            $('#docdivid').html(docinfo);
+            $('#feedvid').html(feeinfo);
+            $('#postaldivid').html(postainfo);
+            $('#supervisordivid').html(supervisorinfo);
+            $("#overlay1").hide();
+        })
+    });
+     function dowloaddoument(ctr, i) {
+        debugger;
+        var baseURLdw = baseurl + 'common/download';
+        let docName = $('#kycdocnameid_' + i + '').val();
+        downloadfile(baseURLdw, ctr.id, docName)
+    }
+</script>
+
+

@@ -1,0 +1,279 @@
+﻿@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<style>   
+    .login-card-body .input-group .form-control, .register-card-body .input-group .form-control { border-right: 1px solid #ced4da;}
+</style>
+
+<link href="~/theams/custom-loder.css" rel="stylesheet" />
+
+<div class="container">
+    <div class="row">
+        <div id="overlay1">
+            <p style="position: absolute; color: White; top: 50%; left: 45%;">
+                Loading, please wait...
+                <img src="~/Images/ajax-loader4.gif" alt="Loader" style="width:105px;height:76px" />
+            </p>
+        </div>
+        <div class="col-md-4">
+            <div id="logerr" style="display: none">
+                <div class="alert alert-danger alert-icon" style="margin: 30px 0px 0px 0px;">
+                    <button type="button" class="close close-btn" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                    <strong>Error: </strong> <span id="wrong_error"></span>
+                </div>
+            </div>
+            <div class="card mlogin">
+                <div class="card-body login-card-body">
+                    <p class="login-box-msg">Sign in to start your session</p>
+                    <form>
+                        <div class="input-group mb-3">
+                            <input type="email" id="txtUserName" class="form-control" placeholder="Email/Phone">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+
+                            </div>
+                        </div>
+                        <p class="error" id="error_username" style="display: none; margin-top: -14px;"></p>
+                        <p class="error" id="error_email" style="display: none;"></p>
+                        <div class="input-group mb-3">
+                            <input type="password" id="txtPassword" class="form-control" placeholder="Password">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+
+                            </div>
+                        </div>
+                        <p class="error" id="error_password" style="display: none;margin-top: -15px;"></p>
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="icheck-primary">
+                                    <input type="checkbox" id="remember">
+                                    <label for="remember">
+                                        Remember Me
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-4">
+                                <button type="button" id="btnLogin" class="btn btn-primary btn-block">Sign In</button>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    </form>
+
+                    <div class="social-auth-links text-center mb-3">
+                        <p>- OR -</p>
+                        <a href="#" class="btn btn-block btn-primary">
+                            <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
+                        </a>
+                        <a href="#" class="btn btn-block btn-danger">
+                            <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
+                        </a>
+                    </div>
+                    <!-- /.social-auth-links -->
+                    <p class="mb-0">
+                        <a href="/Account/UserRegistration" class="text-center">Register a new membership</a>
+                    </p>
+                </div>
+                <!-- /.login-card-body -->
+            </div>
+
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-text-width"></i>
+                        What Do We Do
+                    </h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <p>By using world-class products we sanitise your space and get rid of many life-threatening viruses such as Covid-19. Additionally, our low costs ensure that our services are accessible to people from all walks of life.</p>
+                    <dt>High Quality Products and Services</dt>
+                    <dt>Nominal Charges</dt>
+                    <dt>National Presence</dt>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card below-login-desc">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-text-width"></i>
+                        Why Choose Us
+                    </h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <blockquote>
+                        <big>Micro Clean</big>
+                        <p>At Micro Clean, we believe that each customer is a family to protect. This principle has led to the development of many processes and measures that not only ensures the safety of customers, but also franchisee satisfaction.</p>
+
+                        <dl>
+                    </blockquote>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+</div>
+
+<script src="~/theams/plugins/jquery/jquery.min.js"></script>
+<script src="~/ServiceScript/BaseUrl.js"></script>
+<script type="text/javascript">
+    var burl = baseurl;
+    $('#btnLogin').click(function () {
+        debugger;
+        $("#overlay1").show();
+        var loginurl = burl;
+        var isValid = true;
+        var UserName = $('#txtUserName').val().trim();
+        var Password = $('#txtPassword').val().trim();
+        if (UserName == "") {
+            $("#overlay1").hide();
+            $('#error_username').html("Username is required ");
+            $('#error_username').show();
+            isValid = false;
+        }
+        else {
+            $('#error_username').html("");
+            $('#error_username').hide();
+            //$("#lblSignInUserName").removeClass('error').addClass('error-remove');
+        }
+        if (Password == "") {
+            $("#overlay1").hide();
+            jQuery('#error_password').html("Password is required");
+            jQuery('#error_password').show();
+            isValid = false;
+        }
+        else {
+            $('#error_password').html("");
+            $('#error_password').hide();
+            //$("#lblSignInPassword").removeClass('error').addClass('error-remove');
+        }
+
+        if (isValid) {
+            var Details = new Object();
+            Details.UserName = UserName;
+            Details.Password = Password;
+
+            if ($('#remember').is(':checked')) {
+                // save username and password
+                localStorage.usrname = UserName;
+                localStorage.pass = Password;
+                localStorage.chkbx = $('#remember').val();
+            } else {
+                localStorage.usrname = '';
+                localStorage.pass = '';
+                localStorage.chkbx = '';
+            }
+
+            $.ajax({
+                url: loginurl + 'Account/weblogin',
+                type: 'POST',
+                dataType: 'json',
+                data: (Details),
+
+                success: function (data) {
+                    debugger;
+                    $("#overlay1").hide();
+                    console.log(data);
+                    if (data.status == false) {
+                        var aa = data.message;
+                        //$("#logerr").empty();
+                        $("#logerr").show();
+                        
+                        $("#wrong_error").html(aa);
+                    }
+                    else {
+                        if (data != null || data != "") {
+                            if (data != "" || data != null) {
+                                if (typeof (Storage) !== "undefined") {
+                                    // Store
+                                    localStorage.setItem("token", data.data.token);
+                                    localStorage.setItem("UsersRole", data.data.userRole);
+                                     var Role = localStorage.getItem('UsersRole');
+                                    if (Role == "Super Admin") {
+                                         //window.location = "/Admin/Index";            
+                                        window.location.href = "@Url.Action("Index", "Admin")";
+                                    } else if (Role == "Employee") {
+                                        window.location.href = "@Url.Action("Index", "FranchiseeUser")";
+                                    }else if (Role == "Manager") {
+                                        window.location.href = "@Url.Action("Index", "AdminSupervisor")";
+                                    }
+                                    else {
+                                        //window.location = "/Account/Index";   
+                                        window.location.href = "@Url.Action("GetUserDetail", "Account")";
+                                    }
+                                   
+                                } else {
+                                    // document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+                                }
+                            }
+                        }
+                    }
+                },
+                error: function () {
+                    $("#overlay1").hide();
+                    alert('Something went wrong please try again.')
+                }
+            });
+        }
+    });
+
+    $('#txtUserName').keyup(function () {
+        var $this = $(this);
+        if ($this.val().trim() == "") {
+            $('#txtUserName').css('border-color', 'Red');
+            isValid = false;
+        } else {
+            $('#txtUserName').css('border-color', 'lightgrey');
+        }
+    });
+    $('#txtPassword').keyup(function () {
+        var $this = $(this);
+        if ($this.val().trim() == "") {
+            $('#txtPassword').css('border-color', 'Red');
+            isValid = false;
+        } else {
+            $('#txtPassword').css('border-color', 'lightgrey');
+        }
+    });
+
+    function validateEmail(email) {
+        if (email.value != '') {
+            var reg = /^[\w-\._\+%]+@@(?:[\w-]+\.)+[\w]{2,6}$/;
+            if (reg.test(email.value) == false) {
+                //alert('Invalid Email Address');
+                $('#error_email').html("Invalid email address");
+                $('#error_email').show();
+                document.getElementById("txtUserName").value = '';
+                //document.signup_form.email.focus() ;
+                return false;
+            } else {
+                $('#error_email').html("");
+                $('#error_email').hide();
+            }
+
+            return true;
+        }
+    }
+
+</script>
+
+
+
+
+
+

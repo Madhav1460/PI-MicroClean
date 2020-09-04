@@ -1,0 +1,899 @@
+﻿@{
+    ViewData["Title"] = "UpdateFranchisee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/theams/custom-loder.css" rel="stylesheet" />
+<link href="~/theams/dist/css/DatePicker/jquery.simple-dtpicker.css" rel="stylesheet" />
+<style>
+    .nav-pills .nav-link.active, .nav-pills .show > .nav-link
+    .py-5 .nav-fill .nav-item {
+        background-color: #007bff !important;
+        color: white !important;
+    }
+</style>
+
+<script type="text/javascript">
+    var temp = "";
+    $(document).ready(function () {
+        getuserinfo();
+    });
+</script>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div id="overlay1">
+        <p style="position: absolute; color: White; top: 50%; left: 45%;">
+            Loading, please wait...
+            <img src="~/Images/ajax-loader4.gif" alt="Loader" style="width:105px;height:76px" />
+        </p>
+    </div>
+    <section class="content-header bread">
+        <div class="container-fluid">
+            <div class="row mb-2 top-title">
+                <div class="col-sm-6">
+                    <h4>Franchisee Update</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header p-2">
+                            <ul class="nav nav-pills">
+                                <li class="nav-item"><a class="nav-link active" href="#activity" style="font-weight:600" data-toggle="tab">Personal Information</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#timeline" style="font-weight:600" data-toggle="tab">Company Information</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#settings" style="font-weight:600" data-toggle="tab">KYC Details & Documents</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#fee" style="font-weight:600" data-toggle="tab">Fee Details</a></li>
+                            </ul>
+                        </div>
+                        <input type="hidden" id="selectedstate" />
+                        <!-- /.card-header -->
+                        <div class="card-body card-primary outer-row">
+                            <div class="tab-content">
+                                <div class="active tab-pane" id="activity">
+                                    <section class="content">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <!-- /.card-header 1st section -->
+                                                <form role="form" id="quickForm" enctype="multipart/form-data">
+                                                    <div class="row">
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <input type="hidden" id="hdnfrnUserDetailId" />
+                                                                <label>First Name</label>
+                                                                <span style="color: red;">*</span>
+                                                                <div class="input-group mb-3">
+                                                                    @*<input type="text" class="form-control required" id="txtfrnFirstName" placeholder="Enter First Name">*@
+                                                                    <input type="text" autocomplete="rutjfkde" class="form-control required onlyChar" id="txtFirstName" placeholder="Enter First Name">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                                                    </div>
+                                                                    <span class="error" id="error_firstname" style="display: none;"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Middle Name</label>
+                                                                <div class="input-group mb-3">
+                                                                    @*<input type="text" class="form-control" id="txtfrnMiddleName" placeholder="Enter Middle Name">*@
+                                                                    <input type="text" class="form-control onlyChar" autocomplete="rutjfkde" id="txtMiddleName" placeholder="Enter Middle Name">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Last Name</label>
+                                                                <span style="color: red;">*</span>
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" autocomplete="rutjfkde" class="form-control required onlyChar" id="txtLastName" placeholder="Enter Last name">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                                                    </div>
+                                                                    <span class="error" id="error_lastname" style="display: none;"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Email</label>
+                                                                <span style="color: red;">*</span>
+                                                                <div class="input-group mb-3">
+                                                                    <input type="email" class="form-control required" disabled placeholder="Enter Email" id="txtEmail">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                                                    </div>                                                                   
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Phone no.</label>
+                                                                <span style="color: red;">*</span>
+                                                                <div class="input-group mb-3">
+                                                                    @*<input type="text" class="form-control required" id="txtfrnPhoneno" placeholder="Enter Phone No" maxlength="10" onkeypress="return isNumberKey(event);">*@
+                                                                    <input type="text" autocomplete="rutjfkde" class="form-control required phonedigit onlyDigit" id="txtPhone" placeholder="Enter Phone No" maxlength="10" title="10-digits" onkeypress="return isNumberKey(event);">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                                                    </div>
+                                                                    <span id="errorPhoneMsg" class="error" style="display: none;"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <input type="hidden" id="hdnfrnUserDetailId" />
+                                                                <label>Alternate Email</label>
+                                                                <div class="input-group mb-3">
+                                                                    @*<input type="email" class="form-control" placeholder="Enter Alternate Email" id="txtfrnAlternateEmail" onblur="validateAlternameEmail(this)">*@
+                                                                    <input type="text" autocomplete="rutjfkde" class="form-control validateAlternateEmail" placeholder="Enter Alternate Email" id="txtAlternateEmail">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                                                    </div>
+                                                                    <span class="error" id="error_alteremail" style="display: none;"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Alternate No</label>
+                                                                <div class="input-group mb-3">
+                                                                    @*<input type="text" class="form-control" placeholder="Enter Alternate No" id="txtfrnAlternateNumber" maxlength="10" onkeypress="return isNumberKey(event);">*@
+                                                                    <input type="text" autocomplete="rutjfkde" class="form-control alternate-phonedigit" placeholder="Enter Alternate No" id="txtAlternateNumber" maxlength="10" onkeypress="return isNumberKey(event);" title="10-digits">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                                                    </div>
+                                                                    <span id="errorAlternatePhoneMsg" class="error" style="display: none;"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <input type="hidden" id="hdnfrnAddressId" />
+                                                                <label>State</label>
+                                                                <span style="color: red;">*</span>
+                                                                <div class="input-group mb-3">
+                                                                    <select class="form-control" onchange="getdistrictbystateid(this)" id="ddlState"></select>
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>District</label>
+                                                                <span style="color: red;">*</span>
+                                                                <div class="input-group mb-3">
+                                                                    <select class="form-control" id="ddldistrictid" onchange="GetCityLocationbyDistrictid(this)"></select>
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>City/Location</label>
+                                                                <span style="color: red;">*</span>
+                                                                <div class="input-group mb-3">
+                                                                    <select class="form-control" id="ddlcitylocation" onchange="GetPincode(this);"></select>
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Pincode</label>
+                                                                <span style="color: red;">*</span>
+                                                                <div class="input-group mb-3">
+                                                                    @*<input type="text" class="form-control" placeholder="Enter Pincode" id="txtPincode" maxlength="6" onkeypress="return isNumberKey(event);">*@
+                                                                    <input type="text" autocomplete="rutjfkde" class="form-control required pinlength" placeholder="Enter Pincode" id="txtPincode" maxlength="6">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-map-pin" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                    <span class="error" id="error_pincode" style="display: none;"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Address</label>
+                                                                <span style="color: red;">*</span>
+                                                                <div class="input-group mb-3">
+                                                                    <textarea class="form-control required fullAddress" autocomplete="rutjfkde" id="txtAddress" rows="2"></textarea>
+                                                                    <span class="error" id="error_fullAddress" style="display: none;"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <div class="card-footer register_membership">
+                                                            <button type="button" onclick="franchiseeSelfProfileUpdate();" id="btnUserUpdate" class="btn btn-primary btnvalid">Update</button>
+                                                            <a href="/Account/GetUserDetail" class="btn btn-danger">Cancel</a>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                <!-- /.col -->
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="tab-pane" id="timeline">
+                                    <section class="content">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <!-- /.card-header 1st section -->
+                                                <form role="form" id="quickForm" enctype="multipart/form-data">
+                                                    <div class="row">
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Company Name</label>
+                                                                <span style="color: red;">*</span>
+                                                                <div class="input-group mb-3">
+                                                                    @*<input type="text" class="form-control required" placeholder="Enter Company Name" id="txtCompanyName">*@
+                                                                    <input type="text" class="form-control companyNameRequire" placeholder="Enter Company Name" id="txtCompanyName">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-building" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                    <span class="error" id="error_companyname" style="display: none;"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Company Email</label>
+                                                                <span style="color: red;">*</span>
+                                                                <div class="input-group mb-3">
+                                                                    @*<input type="text" class="form-control required" placeholder="Enter Company Email" id="txtCompanyEmail" onblur="validateCompanyEmail(this)">*@
+                                                                    <input type="text" class="form-control validateCompanyEmail" autocomplete="rutjfkde" placeholder="Enter Company Email" id="txtCompanyEmail">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                    <span class="error" id="error_companyemail" style="display: none;"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Company Phone No</label>
+                                                                <span style="color: red;">*</span>
+                                                                <div class="input-group mb-3">
+                                                                    @*<input type="text" class="form-control required" placeholder="Enter Phone No" maxlength="10" id="txtCompanyPhoneno" onkeypress="return isNumberKey(event);">*@
+                                                                    <input type="text" class="form-control company-phonedigit" autocomplete="rutjfkde" placeholder="Enter Phone No" maxlength="10" id="txtCompanyPhoneno" onkeypress="return isNumberKey(event);">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                    <span class="error" id="error_CompanyPhoneMsg" style="display: none;"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <input type="hidden" id="hdnfrnAddressId" />
+                                                                <label>State</label>
+                                                                <span style="color: red;">*</span>
+                                                                <div class="input-group mb-3">
+                                                                    <select class="form-control ddlfrnState" onchange="getdistrictbystateidClient(this)" id="ddlStateClient"></select>
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>District</label>
+                                                                <span style="color: red;">*</span>
+                                                                <div class="input-group mb-3">
+                                                                    <select class="form-control" id="ddldistrictidClient" onchange="GetCityLocationbyDistrictidClient(this)"></select>
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>City/Location</label>
+                                                                <span style="color: red;">*</span>
+                                                                <div class="input-group mb-3">
+                                                                    <select class="form-control" id="ddlcitylocationClient" onchange="GetPincodeClient(this);"></select>
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Pincode</label>
+                                                                <span style="color: red;">*</span>
+                                                                <div class="input-group mb-3">
+                                                                    @*<input type="text" class="form-control" placeholder="Enter Pincode" id="txtCompanyPincode" maxlength="6" onkeypress="return isNumberKey(event);">*@
+                                                                    <input type="text" class="form-control compy-pinlength" autocomplete="rutjfkde" placeholder="Enter Pincode" id="txtCompanyPincode" maxlength="6" onkeypress="return isNumberKey(event);">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-map-pin" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                    <span class="error" id="error_companypincode" style="display: none;"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Company Address</label>
+                                                                <span style="color: red;">*</span>
+                                                                <div class="input-group mb-3">
+                                                                    <textarea class="form-control" id="txtcompanyAddress" autocomplete="rutjfkde" rows="2"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="card-footer register_membership">
+                                                                <button type="button" onclick="franchiseeSelfProfileUpdate();" id="btnCompanyUpdate" class="btn btn-primary btnvalid">Update</button>
+                                                                <a href="/Account/GetUserDetail" class="btn btn-danger">Cancel</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                <!-- /.col -->
+                                            </div>
+                                            <!-- /.row -->
+                                        </div>
+
+                                    </section>
+                                </div>
+                                <!-- /.tab-pane -->
+                                <div class="tab-pane" id="settings">
+                                    <section class="content">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <!-- /.card-header 1st section -->
+                                                <form role="form" id="quickForm3" enctype="multipart/form-data">
+
+                                                    <div class="row">
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>LOI Agreement / Document</label>
+                                                                <small>(pdf, jpeg, png, doc)</small>
+                                                                <div class="custom-file">
+                                                                    <div class="input-group mb-3">
+                                                                        <input type="text" class="form-control " readonly="readonly" placeholder="Uploaded LOI File Name." id="txtLOIFileName">
+                                                                        <div class="input-group-append">
+                                                                            <span class="input-group-text"><i class="fa fa-file" aria-hidden="true"></i></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label style="width:100%">Download LOI</label>
+                                                                <div class="custom-file">
+                                                                    <div class="input-group mb-3">
+                                                                        <input onclick="downloadUnSingedLoiDoc();" style="line-height: 1.1; font-weight:600" type="button" value="Download" class="btn btn-primary form-inline fa fa-download primary" />
+                                                                        @*<button onclick="downloadUnSingedLoiDoc();" style="line-height: 1.1;" class="btn btn-primary form-inline">Download<i class="fa fa-download primary" aria-hidden="true"></i></button>*@
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div><br />
+                                                    <div class="row docbox">
+                                                        <div class="col-sm-3 col-6">
+                                                            <div class="form-group">
+                                                                <div class="input-group mb-3">
+                                                                    <input type="hidden" id="selectDocument_6" value="7" />
+                                                                    <input type="hidden" id="hdnDocId_6" />
+                                                                    <input type="text" class="form-control form-inline" value="Signed LOI" id="selectDocument_66" readonly="readonly">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 col-6">
+                                                            <div class="form-group">
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" class="form-control form-inline" id="selectDocumenttext_5" readonly="readonly">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-file" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-3 col-12">
+                                                            <div class="form-group">
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" class="form-control" disabled placeholder="Upload Date" maxlength="16" id="txtSignedLOIDate">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-12 uploadbutton">
+                                                            <div class="mb-2 mr-sm-2 wrap-input-container" style="width:20%">
+                                                                <label class="custom-file-upload form-control" style="background-color:#007bff;color: white;"><i class="fa fa-upload" aria-hidden="true"></i></label>
+                                                                <input type="file" class="file-upload" id="docfile_6">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr />
+
+                                                    <div class="row">
+                                                        <div class="col-sm-3 col-3">
+                                                            <div class="form-group">
+                                                                <label>Document Type</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 col-3">
+                                                            <div class="form-group">
+                                                                <label>Document Name</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 col-3">
+                                                            <div class="form-group">
+                                                                <label>Document No.</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-2 col-2">
+                                                            <div class="form-group">
+                                                                <label>Upload Date</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-1 col-1">
+                                                            <div class="form-group">
+                                                                <label>Action</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row docbox">
+                                                        <div class="col-sm-3 col-3">
+                                                            <div class="form-group">
+                                                                <div class="input-group mb-3">
+                                                                    <input type="hidden" id="selectDocument_1" value="1" />
+                                                                    <input type="hidden" id="hdnDocId_1" />
+                                                                    <input type="text" class="form-control form-inline" value="Owner Adhar Card" id="selectDocument_11" readonly="readonly">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 col-3">
+                                                            <div class="form-group">
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" class="form-control form-inline" id="selectDocumenttext_0" readonly="readonly">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-file" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 col-3">
+                                                            <div class="form-group">
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" class="form-control" placeholder="Enter Aadhaar No" maxlength="12" id="txtOwnersAadharCardNo" onkeypress="return isNumberKey(event);" onchange="adharCardNoFunction()">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-sort-numeric-desc" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                    <span class="error" id="errorOwnerAadharCard" style="display:none; color:red"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-2 col-2">
+                                                            <div class="form-group">
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" class="form-control" disabled placeholder="Upload Date" id="txtAdharDate">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-1 uploadbutton">
+                                                            <div class="mb-2 mr-sm-2 wrap-input-container">
+                                                                <label class="custom-file-upload form-control" style="background-color:#007bff;color: white;">
+                                                                    <i class="fa fa-upload" aria-hidden="true"></i>
+                                                                </label>
+                                                                <input type="file" class="file-upload" id="docfile_1">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row docbox">
+                                                        <div class="col-sm-3 col-3">
+                                                            <div class="form-group">
+                                                                <div class="input-group mb-3">
+                                                                    <input type="hidden" id="selectDocument_2" value="2" />
+                                                                    <input type="hidden" id="hdnDocId_2" />
+                                                                    <input type="text" class="form-control form-inline" value="Owner PAN Card" id="selectDocument_22" readonly="readonly">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 col-3">
+                                                            <div class="form-group">
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" class="form-control form-inline" id="selectDocumenttext_1" readonly="readonly">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-file" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 col-3">
+                                                            <div class="form-group">
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" class="form-control" placeholder="Enter PAN No" maxlength="10" id="txtOwnerPANCardNo" onchange="ownerPANCardNoFunction()">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-sort-numeric-desc" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                    <span class="error" id="errorOwnerPANCard" style="display:none; color:red"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-2 col-2">
+                                                            <div class="form-group">
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" class="form-control" placeholder="Upload Date" disabled id="txtOwnerPANDate">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-1 uploadbutton">
+                                                            <div class="mb-2 mr-sm-2 wrap-input-container">
+                                                                <label class="custom-file-upload form-control" style="background-color:#007bff;color: white;">
+                                                                    <i class="fa fa-upload" aria-hidden="true"></i>
+                                                                </label>
+                                                                <input type="file" class="file-upload" id="docfile_2">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row docbox">
+                                                        <div class="col-sm-3 col-3">
+                                                            <div class="form-group">
+                                                                <div class="input-group mb-3">
+                                                                    <input type="hidden" id="selectDocument_4" value="4" />
+                                                                    <input type="hidden" id="hdnDocId_4" />
+                                                                    <input type="text" class="form-control form-inline" value="Company PAN Card" id="selectDocument_44" readonly="readonly">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 col-3">
+                                                            <div class="form-group">
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" class="form-control form-inline" id="selectDocumenttext_3" readonly="readonly">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-file" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 col-3">
+                                                            <div class="form-group">
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" class="form-control" placeholder="Enter Company PEN Card" maxlength="10" id="txtCompanyPANCardNo" onchange="companyPANCardNoFunction()">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-sort-numeric-desc" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                    <span class="error" id="errorCompanyPANCard" style="display:none; color:red"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-2 col-2">
+                                                            <div class="form-group">
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" class="form-control" disabled placeholder="Upload Date" maxlength="16" id="txtCompanyPANCardDate">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-1 uploadbutton">
+                                                            <div class="mb-2 mr-sm-2 wrap-input-container">
+                                                                <label class="custom-file-upload form-control" style="background-color:#007bff;color: white;">
+                                                                    <i class="fa fa-upload" aria-hidden="true"></i>
+                                                                </label>
+                                                                <input type="file" class="file-upload" id="docfile_4">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row docbox">
+                                                        <div class="col-sm-3 col-3">
+                                                            <div class="form-group">
+                                                                <div class="input-group mb-3">
+                                                                    <input type="hidden" id="selectDocument_5" value="5" />
+                                                                    <input type="hidden" id="hdnDocId_5" />
+                                                                    <input type="text" class="form-control form-inline" value="Company GST Document" id="selectDocument_55" readonly="readonly">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 col-3">
+                                                            <div class="form-group">
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" class="form-control form-inline" id="selectDocumenttext_4" readonly="readonly">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-file" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 col-3">
+                                                            <div class="form-group">
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" class="form-control" placeholder="Enter GST No" maxlength="15" id="txtCompanyGSTNo" onchange="gstFunction()">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-sort-numeric-desc" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                    <span class="error" id="errorGSTNumber" style="display:none; color:red"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-2 col-2">
+                                                            <div class="form-group">
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" class="form-control" disabled placeholder="Upload Date" id="txtCompanyGSTNoDate">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-1 uploadbutton">
+                                                            <div class="mb-2 mr-sm-2 wrap-input-container">
+                                                                <label class="custom-file-upload form-control" style="background-color:#007bff;color: white;">
+                                                                    <i class="fa fa-upload" aria-hidden="true"></i>
+                                                                </label>
+                                                                <input type="file" class="file-upload" id="docfile_5">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row docbox">
+                                                        <div class="col-sm-3 col-3">
+                                                            <div class="form-group">
+                                                                <div class="input-group mb-3">
+                                                                    <input type="hidden" id="selectDocument_3" value="3" />
+                                                                    <input type="hidden" id="hdnDocId_3" />
+                                                                    <input type="text" class="form-control form-inline" value="Owner Photo" id="selectDocument_33" readonly="readonly">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 col-3">
+                                                            <div class="form-group">
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" class="form-control form-inline" id="selectDocumenttext_2" readonly="readonly">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-file" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 col-3">
+                                                            <div class="form-group">
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" class="form-control" placeholder="OwnerPhoto" maxlength="10" id="txtOwnerPhotoNo">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-sort-numeric-desc" aria-hidden="true"></i></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-2 col-2">
+                                                            <div class="form-group">
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" class="form-control" disabled placeholder="Upload date" id="txtOwnerPhotoDate">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-1 uploadbutton">
+                                                            <div class="mb-2 mr-sm-2 wrap-input-container">
+                                                                <label class="custom-file-upload form-control" style="background-color:#007bff; color: white;">
+                                                                    <i class="fa fa-upload" aria-hidden="true"></i>
+                                                                </label>
+                                                                <input type="file" class="file-upload" id="docfile_3">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="card-footer register_membership">
+                                                                <button type="button" onclick="franchiseeSelfProfileUpdate();" id="btnUpdate" class="btn btn-primary">Update</button>
+                                                                <a href="/Account/GetUserDetail" class="btn btn-danger">Cancel</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+                                                <!-- /.col -->
+                                            </div>
+                                            <!-- /.row -->
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="tab-pane" id="fee">
+                                    <section class="content">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <!-- /.card-header 1st section -->
+                                                <form role="form" id="quickForm" enctype="multipart/form-data">
+                                                    <div class="row">
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label id="">Franchisee Fee</label>
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" readonly="readonly" class="form-control required" placeholder="Enter Company Name" id="txtFranchiseeFee">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-inr" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Other Fee / Cost</label>
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" class="form-control required" placeholder="Enter Other Fee / Cost" readonly="readonly" id="txtOtherFeeCost">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-inr" aria-hidden="true"></i></span>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Fixed Monthly Fee</label>
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" class="form-control required" placeholder="Enter Fixed Monthly Fee" readonly="readonly" id="txtFixedMonthlyFee">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fa fa-inr" aria-hidden="true"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Minimum Threshold Due Amount</label>
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" class="form-control" placeholder="Enter Minimum Threshold Due Amount" readonly="readonly" id="txtMinimumThresholdDueAmount">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fas fa-inr"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Total Amount</label>
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" class="form-control" readonly="readonly" placeholder="Enter Total Amount" id="txtTotalAmount">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fas fa-inr"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <div class="form-group">
+                                                                <label>Payment Term</label>
+                                                                <div class="input-group mb-3">
+                                                                    <textarea class="form-control" readonly="readonly" id="txtPaymentTerm" rows="2" placeholder="Enter Payment Term"></textarea>
+                                                                    @*<input type="text" class="form-control" readonly="readonly" placeholder="Enter Payment Term" id="txtPaymentTerm">*@
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i class="fas fa-file"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="box-body table-responsive tableFixHead">
+                                                        <table class="table table-hover text-nowrap striped">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>Payment Date</th>
+                                                                    <th>Reference No</th>
+                                                                    <th>Payment Type </th>
+                                                                    <th>Amount Paid</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody class="tbody">
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                </form>
+                                                <!-- /.col -->
+                                            </div>
+                                            <!-- /.row -->
+                                        </div>
+
+                                    </section>
+                                </div>
+                            </div>
+                            <!-- /.tab-content -->
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.nav-tabs-custom -->
+                </div>
+                <!-- /.col -->
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<script src="~/ServiceScript/BaseUrl.js"></script>
+<script src="~/theams/plugins/jquery/jquery.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="~/ServiceScript/userAccountService.js"></script>
+<script src="~/ServiceScript/Service.js"></script>
+<script src="~/ServiceScript/Common.js"></script>
+<script src="~/ServiceScript/Validation/CommonValidation.js"></script>
+<script src="~/ServiceScript/UserUpdate.js"></script>
+
+<script type="text/javascript">
+    $(document).on('change', '.file-upload', function () {
+        var i = $(this).prev('label').clone();
+        var file = this.files[0].name;
+        $(this).prev('label').text(file);
+    });  
+
+</script>
+
+
+
+

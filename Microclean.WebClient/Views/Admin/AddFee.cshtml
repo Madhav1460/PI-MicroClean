@@ -1,0 +1,310 @@
+﻿<style>
+    .error {
+        color: red;
+        width: 100%;
+        margin-bottom: 0px;
+    }
+    .red_border {
+        border-color: red !important;
+    }
+    .astrick {
+        color: red;
+        position: absolute;
+        margin-top: -41px;
+        margin-left: 213px;
+    }
+    .tableFixHead {
+        overflow-y: auto;
+        height: 150px;
+    }
+    .input-wrapper {
+        display: inline-block;
+        position: relative
+    }
+    .input-wrapper:after {
+        font-family: 'FontAwesome';
+        content: '\f274';
+        position: absolute;
+        right: 0px;
+        margin-top: -28px
+    }
+</style>
+
+<link href="~/theams/microclean_payment.css" rel="stylesheet" />
+<link href="~/theams/dist/css/DatePicker/jquery.datetimepicker.min.css" rel="stylesheet" />
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Fee Details</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <!-- /.card-header -->
+                            <div class="card-body table-responsive p-0">
+                                <input type="hidden" value="1" id="hdnFranchiseeFee" />
+                                <input type="hidden" id="hddnFranchiseeFeeid" />
+                                <input type="hidden" value="2" id="hdnOtherFee" />
+                                <input type="hidden" id="hddnOtherFeeid" />
+                                <input type="hidden" value="3" id="hdnFixedMonthlyFee" />
+                                <input type="hidden" id="hddnFixedMonthlyFeeid" />
+                                <input type="hidden" value="4" id="hdnThresholdAmount" />
+                                <input type="hidden" id="hddnThresholdAmountid" />
+                                <table class="table table-hover text-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>Payment <br>Type</th>
+                                            <th>Payable  <br>Amount</th>
+                                            <th>Payment <br>Type</th>
+                                            <th>Payable  <br>Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>Franchisee Fee</th>
+                                            <td>
+                                                <input type="hidden" value="1" id="hdnFranchiseeFee" />
+                                                <input type="hidden" id="hddnFranchiseeFeeid" />
+                                                <div class="star">*</div>
+                                                <input type="number" class="onlyInt required input-sm summition1" id="txtFranchiseeFee" min="0" name="FranchiseeFee" placeholder="Enter Franchisee Fee">
+                                            </td>
+                                            <th>Fixed Monthly Fee</th>
+                                            <td>
+                                                <input type="hidden" value="3" id="hdnFixedMonthlyFee" />
+                                                <input type="hidden" id="hddnFixedMonthlyFeeid" />
+                                                <div class="star">*</div>
+                                                <input type="number" class="onlyInt required input-sm" id="txtFixedMonthlyFee" min="0" name="FixedMonthlyFee" placeholder="Enter Monthly Fee">
+                                                <span class="error" id="errorFixedMonthly" style="display:none; color:red"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Other Fee/Cost</th>
+                                            <td>
+                                                <input type="hidden" value="2" id="hdnOtherFee" />
+                                                <input type="hidden" id="hddnOtherFeeid" />
+                                                <div class="star">*</div>
+                                                <input type="number" class="onlyInt required input-sm summition1" id="txtOtherFee" min="0" name="DisposableStockCost" placeholder="Enter Other Fee">
+                                            </td>
+                                            <th>Minimum Threshold Due Amount</th>
+                                            <td>
+                                                <input type="hidden" value="4" id="hdnThresholdAmount" />
+                                                <input type="hidden" id="hddnThresholdAmountid" />
+                                                <div class="star">*</div>
+                                                <input type="number" class="onlyInt required thresholdypercentage input-sm" min="0" id="txtThresholdAmount" name="ThresholdAmount" placeholder="Enter Threshold Amount">
+                                                <span class="error" id="errorThreshold" style="display:none; color:red"></span>
+                                            </td>
+                                        </tr>                                       
+                                        <tr>
+                                            <th>Total Amount</th>
+                                            <td><div class="star">*</div><input type="text" disabled="disabled" class="onlyInt required input-sm summitiontotal1" id="txtTotalPaybleAmount" name="txtPaybleAmountTotal" placeholder="Total Amount"></td>
+                                            <th>Due Date</th>
+                                            <td>
+                                                <div class="star">*</div>
+                                                <div class="input-wrapper">
+                                                    <input type="text" style="width: 182px;" autocomplete="off" class="required form-control input-sm" id="txtDuedate" name="Duedate" placeholder="dd-mm-yy">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Payment Terms</th>
+                                            <td><textarea class="form-control" name="PaymentTerms" id="txtPaymentTerms" rows="2" cols="2" placeholder="Enter Payment Terms"></textarea></td>
+                                            <th></th>
+                                           <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <span style="color:red">*</span><small style="color:red">Total Amount is of Franchisee fee and Other fee</small>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    @*<button type="button" class="btn" style="background-color: #007B9F;color: white;border-color: #007B9F;" id="btnUpdateFee" onclick="commercialDetailUpdate();">Update Payment</button>*@
+                    <button type="button" class="btn btn-primary" id="btnAddfeeId" onclick="commercialdetailsubmit();">Save changes</button>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="~/ServiceScript/BaseUrl.js"></script>
+<script src="~/ServiceScript/Service.js"></script>
+<script src="~/ServiceScript/feeValidation.js"></script>
+<script src="~/ServiceScript/paymentData.js"></script>
+<script src="~/ServiceScript/Validation/paymentUpdateValidation.js"></script>
+<script src="~/theams/dist/js/DatimePicker/jquery.datetimepicker.js"></script>
+<script type="text/javascript">
+
+    $('#txtDuedate').datetimepicker({     
+        timepicker: false,
+        minDate: 0,
+        format: 'd/m/yy'
+     //minDate:'-1970/01/02', //yesterday is minimum date    
+     //maxDate:'+1970/01/02' //tomorrow is maximum date      
+});
+
+    $(document).ready(function () {
+        EnableDigitValidation();
+        var userid = sessionStorage.userId;
+        var url = 'company/getfeedetailbyuserid'
+        GetFeeData(url, userid).then(data => {
+            console.log(data);
+            sessionStorage.setItem('paymentData1', JSON.stringify(data.data));
+            if (data.data.feeDetails.length != 0) {
+                if (data.data.feeDetails[0].previousPaidAmount == 0) {
+                    $("#btnAddfeeId").attr("disabled", false);
+                    $('input').removeAttr('disabled');
+                    $('textarea[name="PaymentTerms"]').prop('disabled', false); 
+                    var totalAmount = data.data.feeDetails[0].feeValue + data.data.feeDetails[1].feeValue;
+
+                    for (var i = 0; i < data.data.feeDetails.length; i++) {
+                        if (data.data.feeDetails[i].feeTypeId == 1) {
+                            $('#txtFranchiseeFee').val(parseFloat(data.data.feeDetails[i].feeValue).toFixed(2));
+                        }
+                        if (data.data.feeDetails[i].feeTypeId == 2) {
+                            $('#txtOtherFee').val(parseFloat(data.data.feeDetails[i].feeValue).toFixed(2));
+                        }
+                        if (data.data.feeDetails[i].feeTypeId == 3) {
+                            $('#txtFixedMonthlyFee').val(parseFloat(data.data.feeDetails[i].feeValue).toFixed(2));
+                        }
+                        if (data.data.feeDetails[i].feeTypeId == 4) {
+                            $('#txtThresholdAmount').val(parseFloat(data.data.feeDetails[i].feeValue).toFixed(2));
+                        }
+                    }
+                    $('#txtTotalPaybleAmount').val(parseFloat(totalAmount).toFixed(2));
+                    $('#txtPaymentTerms').val(data.data.feeDetails[0].paymentTerms);
+                    $('#txtDuedate').val(data.data.feeDetails[0].paymentDueDate);
+
+                    $('#hddnFranchiseeFeeid').val(data.data.feeDetails[0].feeId);
+                    $('#hddnOtherFeeid').val(data.data.feeDetails[1].feeId);
+                    $('#hddnFixedMonthlyFeeid').val(data.data.feeDetails[2].feeId);
+                    $('#hddnThresholdAmountid').val(data.data.feeDetails[3].feeId);
+                    var totalPaymentDue = parseFloat($("#FranchiseeFeepaymentDue").val()) + parseFloat($("#OtherFeepaymentDue").val());
+                } else {
+                    $("#btnAddfeeId").attr("disabled", true);
+                    $('input').attr('disabled', 'disabled');
+                    $('textarea[name="PaymentTerms"]').prop('disabled', true); 
+                    var totalAmount = data.data.feeDetails[0].feeValue + data.data.feeDetails[1].feeValue;
+
+                    for (var i = 0; i < data.data.feeDetails.length; i++) {
+                        if (data.data.feeDetails[i].feeTypeId == 1) {
+                            $('#txtFranchiseeFee').val(data.data.feeDetails[i].feeValue);
+                        }
+                        if (data.data.feeDetails[i].feeTypeId == 2) {
+                            $('#txtOtherFee').val(data.data.feeDetails[i].feeValue);
+                        }
+                        if (data.data.feeDetails[i].feeTypeId == 3) {
+                            $('#txtFixedMonthlyFee').val(data.data.feeDetails[i].feeValue);
+                        }
+                        if (data.data.feeDetails[i].feeTypeId == 4) {
+                            $('#txtThresholdAmount').val(data.data.feeDetails[i].feeValue);
+                        }
+                    }
+                    $('#txtTotalPaybleAmount').val(totalAmount);
+                    $('#txtPaymentTerms').val(data.data.feeDetails[0].paymentTerms);
+                    $('#txtDuedate').val(data.data.feeDetails[0].paymentDueDate);
+
+                    $('#hddnFranchiseeFeeid').val(data.data.feeDetails[0].feeId);
+                    $('#hddnOtherFeeid').val(data.data.feeDetails[1].feeId);
+                    $('#hddnFixedMonthlyFeeid').val(data.data.feeDetails[2].feeId);
+                    $('#hddnThresholdAmountid').val(data.data.feeDetails[3].feeId);
+                    var totalPaymentDue = parseFloat($("#FranchiseeFeepaymentDue").val()) + parseFloat($("#OtherFeepaymentDue").val());
+                }
+            }
+        });
+    });
+    function commercialdetailsubmit() {
+        debugger;
+        let userid = sessionStorage.userId;
+
+        let franchiseefeesId = $('#hddnFranchiseeFeeid').val();
+        let otherfeesId = $('#hddnOtherFeeid').val();
+        let fixedmonthlyfeesId = $('#hddnFixedMonthlyFeeid').val();
+        let thresholdamountId = $('#hddnThresholdAmountid').val();
+
+        let franchiseefeeidval = $('#hdnFranchiseeFee').val();
+        let otherfeeidval = $('#hdnOtherFee').val();
+        let fixedfeeidval = $('#hdnFixedMonthlyFee').val();
+        let thresholdidval = $('#hdnThresholdAmount').val();
+
+        var franchiseefeeval = "";
+        var otherfeeval = "";
+        var fixedfeeval = "";
+        var thresholdval = "";
+        if (CheckRequiredFields()) {
+            var formData = new FormData();
+            franchiseefeeval = $('#txtFranchiseeFee').val();
+            otherfeeval = $('#txtOtherFee').val();
+            fixedfeeval = $('#txtFixedMonthlyFee').val();
+            thresholdval = $('#txtThresholdAmount').val();
+            totalamountval = $('#txtTotalPaybleAmount').val();
+            paymenttermsval = $('#txtPaymentTerms').val();
+            duedateval = $('#txtDuedate').val();
+            formData.append("UserId", userid);
+            formData.append("FranchiseeFeesId", franchiseefeesId != "" ? franchiseefeesId : 0);
+            formData.append("OtherFeesId", otherfeesId != "" ? otherfeesId : 0);
+            formData.append("FixedMonthlyFeesId", fixedmonthlyfeesId != "" ? fixedmonthlyfeesId : 0);
+            formData.append("ThresholdAmountsId", thresholdamountId != "" ? thresholdamountId : 0);
+
+            formData.append("FranchiseeFee", franchiseefeeval != "" ? parseFloat(franchiseefeeval) : 0);
+            formData.append("OtherFee", otherfeeval != "" ? parseFloat(otherfeeval) : 0);
+            formData.append("FixedMonthlyFee", fixedfeeval != "" ? parseFloat(fixedfeeval) : 0);
+            formData.append("ThresholdAmount", thresholdval != "" ? parseFloat(thresholdval) : 0);
+            formData.append("PaymentTerms", paymenttermsval);
+            formData.append("PaymentDueDate", duedateval);           
+            
+            formData.append("FranchiseeFeeId", franchiseefeeidval);
+            formData.append("OtherFeeId", otherfeeidval);
+            formData.append("FixedMonthlyFeeId", fixedfeeidval);
+            formData.append("ThresholdAmountId", thresholdidval);
+            formData.append("TotalAmmount", parseFloat(totalamountval));
+            datasave('Company/addfranchiseefee', formData).then(data => {
+                debugger;
+                if (data.data !== null) {
+                    alert(data.data.message);
+                    $('#modal-default').modal('hide');
+                }
+            });
+        }
+    }
+
+    $('.summition').on('input', function () {
+        var total = 0;
+        $('.summition').each(function () {
+            total += parseFloat($(this).val()) || 0;
+        });
+        if (total > 0) {
+            $('.summitiontotal').val(parseFloat(total));
+            $('#btnAddfeeId').prop("disabled", false);
+        } else {
+            $('.summitiontotal').val(parseFloat(total));
+            $('#btnAddfeeId').prop("disabled", true);
+        }
+    });
+
+    $('.summition1').on('input', function () {
+        var total = 0;
+        $('.summition1').each(function () {
+            total += parseFloat($(this).val()) || 0;
+        });
+        $('.summitiontotal1').val(parseFloat(total));
+    });
+
+    $("#txtFranchiseeFee").keyup(function () {
+        $("#txtThresholdAmount").val("");
+    });
+</script>

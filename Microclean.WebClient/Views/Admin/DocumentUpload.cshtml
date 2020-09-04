@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewData["Title"] = "DocumentUpload";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link href="~/theams/AdminLTE.css" rel="stylesheet" />
+<link href="~/theams/Toaster/ToasterCSS/toastr.css" rel="stylesheet" />
+<style>
+    .form-control {
+        padding: .1rem .75rem !important;
+    }
+    .main-footer {
+    padding: .5rem !important;
+    background: #000 !important;
+}
+    .sidepanel {
+        padding-top: 0px;
+        width: 250px;
+    }
+    .content-wrapper {
+        background-color: #ffffff !important;
+    }
+
+    .psd {
+        margin: auto;
+        border-radius: 4px;
+        padding: 9px;
+    }  
+
+    .row {
+        margin-right: -15px;
+        margin-left: -15px;
+        margin-top: 15px !important;
+    }
+    .psd1 {
+        margin: auto;
+        padding: inherit;
+        display: flex;
+    }
+    .box-header with-border {
+        background-color: lightgrey !important;
+    }
+</style>
+<div class="content-wrapper tempbg">
+    <!-- Content Header (Page header) -->
+    <section class="content-header bread">
+        <div class="container-fluid" style="margin-top: -27px;">
+            <div class="row mb-2 top-title">
+                <div class="col-sm-6">
+                    <h4>Document Upload/Download</h4>
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card card-primary outer-row">                      
+                        <div class="card-body myform">
+                            <div class="col-md-6">
+                                <label for="lblFranchisee" style="padding-left:0px;">Please Select the Franchisee</label>
+
+                                <select id="franchiseeid" onchange="GetFrenId(this);" class="form-control"></select>
+                                <span class="error" id="error_ddl" style="display:none; color:red"></span>
+                            </div>
+                            <div class="row">
+                                <div class="box-primary">
+                                    <div class="box-header">
+                                        <div class="box-header with-border border-dark">
+                                            <h3 class="box-title" style="font-weight:600"> LOI/Agreement Document</h3>
+                                        </div>
+                                        <small style="padding:9px;">Only (gif, jpg, png, pdf, doc, docs) extension are allowed for file upload</small>
+                                        <div class="form-inline psd">
+
+                                            <label for="lblEmail"> Upload LOI/Agreement: </label>&nbsp;
+                                            <input type="file" class="form-control required form-inline" id="LOIFileId" name="UploadLOI" value="" placeholder="Upload">&nbsp;&nbsp;&nbsp;
+                                            <input type="text" class="form-control required form-inline" style="width: 333px;" id="LOIFilename" name="UploadedFileName" value="" placeholder="File Name" readonly>&nbsp;&nbsp;&nbsp;
+
+                                            <div class="form-group">
+                                                <br /><br /><br /><br />
+                                                <div class="form-inline">
+                                                    <label for="lblEmail"> Download Signed LOI/Agreement: </label>&nbsp;
+                                                    <input type="button" id="downloadSignedLOI" value="Download" style=" background-color: #07628b; color: white;width: 222px;" class="btn form-inline" />
+                                                    <input type="text" class="form-control required form-inline" style="width: 333px;margin-left: 13px;" id="SignedLOIFilename" name="UploadedFileName" value="" placeholder="File Name" readonly>&nbsp;&nbsp;&nbsp;
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <button type="button" id="btnCancelId" class="btn btn-warning" onclick="location.href='@Url.Action("Index","Admin")'"><b>Cancel</b></button>
+                                        <button type="submit" id="btnUpload" class="btn btn-primary"><b>Save</b></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="box-primary">
+                                    <div class="box-header">
+                                        <div class="box-header with-border border-dark">
+                                            <h3 class="box-title" style="font-weight:600"> KYC Document View/Download</h3>
+                                        </div>
+                                        <div class="psd1" id="dvdoclist"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script src="~/ServiceScript/BaseUrl.js"></script>
+<script src="~/theams/Toaster/ToasterJS/toastr.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="~/ServiceScript/userAccountService.js"></script>
+<script src="~/ServiceScript/Service.js"></script>
+<script src="~/ServiceScript/superadmincompanydocumnetupload.js"></script>
+<script>
+    $(document).ready(function () {
+        kyCDocumentList();        
+        getfranchiseeList();
+    });
+</script>

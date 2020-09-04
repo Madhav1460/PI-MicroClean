@@ -1,0 +1,182 @@
+﻿
+@{
+    ViewData["Title"] = "TrainingDocUpload";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <script>
+        $(document).ready(function () {
+            $("#VideoFile").hide();
+        });
+    </script>
+    <script type="text/javascript">
+        var spinnerVisible = false;
+        function showProgress() {
+            if (!spinnerVisible) {
+                $("div#spinner").fadeIn("fast");
+                spinnerVisible = true;
+            }
+        };
+        function hideProgress() {
+            if (spinnerVisible) {
+                var spinner = $("div#spinner");
+                spinner.stop();
+                spinner.fadeOut("fast");
+                spinnerVisible = false;
+            }
+        };
+    </script>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header bread">
+        <div class="container-fluid">
+            <div class="row mb-2 top-title">
+                <div class="col-sm-6">
+                    <h4>Add Document Videos</h4>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Ribbons</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content ">
+        <div class="container-fluid ">
+            <div class="row ">
+                <div class="col-12 ">
+                    <div class="card card-primary outer-row">
+                        <!-- /.card-header 1st section -->
+                        
+                        <form role="form" id="quickForm" enctype="multipart/form-data">
+                            <div class="card-body myform">
+                                <div id="spinner">
+                                    Loading...
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4 col-6">
+                                        <div class="form-group">
+                                            <label>Document Type</label>
+                                            <select id='purpose' class="form-control select2" style="width: 100%;">
+                                                <option value="0" selected="selected">-Select-</option>
+                                                <option value="1">Video</option>
+                                                <option value="2">Document</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-6">
+                                        <div class="form-group">
+                                            <label>Title</label>
+                                            <input type="text" class="form-control" id="txttitle" placeholder="Enter Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <textarea id="txtdescription" class="form-control" rows="2" placeholder="Description"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group" id="docfilediv">
+                                            <label for="docfile">Select File To Upload </label>
+                                            <div class="custom-file">
+                                                <input type="file" accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-powerpoint, application/vnd.openxmlformats-officedocument.presentationml.slideshow, application/vnd.openxmlformats-officedocument.presentationml.presentation/*" onchange="DisplayFilesToUpload()" class="custom-file-input" id="docfile">
+                                                <label class="custom-file-label" for="docfile">Choose file</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4" id="VideoFile">
+                                        <div class="form-group">
+                                            <label for="videofile">Choose Video </label>
+                                            <div class="custom-file">
+                                                <input type="file" accept="video/mp4" class="custom-file-input" id="videofile">
+                                                <label class="custom-file-label" for="videofile">Choose file</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @*<div class="col-sm-4">
+                <div class="form-group" id="videofilethumb">
+                    <label for="videofilethumb">Choose Thumbnail</label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="videofilethumb">
+                        <label class="custom-file-label" for="videofilethumb">Choose file</label>
+                    </div>
+                </div>
+            </div>*@
+                                    <div class="col-sm-4 col-6">
+                                        <div class="card-footer mysubmit2">
+                                            <button type="button" onclick="TrainingDocUpload();" class="btn btn-primary">Submit</button>
+                                            <button type="button" class="btn btn-primary btn-danger">Cancel</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </form>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+    <!-- /.content-wrapper -->
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+<script src="~/ServiceScript/BaseUrl.js"></script>
+<script src="~/theams/plugins/jquery/jquery.min.js"></script>
+<script src="~/ServiceScript/userAccountService.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="~/ServiceScript/Service.js"></script>
+
+<script>
+    function DisplayFilesToUpload() {
+            var html = "";
+            html = "<h3>Documents(s) to Upload</h3>"
+            var documentfile = document.getElementById("docfile").files[0];
+            if (documentfile != null) {
+                const fileType = documentfile['type'];
+                const validdocumentTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.ms-powerpoint', 'application/vnd.openxmlformats-officedocument.presentationml.slideshow','application/vnd.openxmlformats-officedocument.presentationml.presentation'];
+                if (!validdocumentTypes.includes(fileType)) {
+                    alert('This is not an Document file!');
+                    document.getElementById("docfile").value = "";
+                }
+
+                if (documentfile.size > 100097152) {
+                    alert('Please select less then 2mb file your file size is: ' + (documentfile.size / 1024) / 1024 + '');
+                    document.getElementById("docfile").value = "";
+                }
+            }
+        }
+</script>
+<script type="text/javascript">
+$('#purpose').on('change', function() {
+  if ( this.value == '1')
+  {
+      $("#VideoFile").show();
+      $("#docfilediv").hide();
+      $("#videofilethumb").show();
+  }
+  else
+  {
+      $("#docfilediv").show();
+      $("#VideoFile").hide();
+      $("#videofilethumb").hide();
+  }
+});
+</script>

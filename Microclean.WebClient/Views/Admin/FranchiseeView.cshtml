@@ -1,0 +1,210 @@
+﻿
+@{
+    ViewData["Title"] = "FranchiseeView";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header bread">
+        <div class="container-fluid">
+            <div class="row mb-2 top-title">
+                <div class="col-sm-9">
+                    <h4>Franchisee View</h4>
+                </div>
+                <div class="col-sm-3">
+                        <a href="/Admin/UpdateFranchisee" role="button" class="btn btn-success pull-right">Update Franchisee</a>
+                    </div>
+            </div>
+
+        </div><!-- /.container-fluid -->
+
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header p-2">
+                            <ul class="nav nav-pills">
+                                <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">User Information</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Company Information</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Documents Information</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#feestructure" data-toggle="tab">Fee Infomation</a></li>
+                                @*<li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Document Information</a></li>*@
+                                <li class="nav-item"><a class="nav-link" href="#allocatedsupervisortab" data-toggle="tab">Assigned Supervisor</a></li>
+                            </ul>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body card-primary outer-row">
+                            <div class="tab-content">
+                                <div class="active tab-pane" id="activity">
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        @*<input type="hidden" id="hdnId" value="6" />*@
+                                        <strong><i class="fas fa-user"></i> Name</strong>
+                                        <p class="text-muted" id="fullName"></p>
+                                        <hr>
+                                        <strong><i class="fas fa fa-envelope mr-1"></i> Email</strong>
+                                        <p class="text-muted" id="email"></p>
+                                        <hr>
+                                        <strong><i class="fas fa-phone-alt mr-1"></i> Phone No.</strong>
+                                        <p class="text-muted" id="phoneno"></p>
+                                        <hr>
+                                        <strong><i class="fas fa fa-envelope mr-1"></i> Alternate Email</strong>
+                                        <p class="text-muted" id="alternate_email"></p>
+                                        <hr>
+                                        <strong><i class="fas fa-phone-alt mr-1"></i> Altername Phone No.</strong>
+                                        <p class="text-muted" id="alternate_phoneno"></p>
+                                        <hr>
+                                        <strong><i class="fas fa-user"></i> User Adhar Card No</strong>
+                                        <p class="text-muted" id="oAdharNo"></p>
+                                        <hr>
+                                        <strong><i class="fas fa-user"></i>User PAN Card No</strong>
+                                        <p class="text-muted" id="oPanNo"></p>
+                                        <hr>
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+
+                                <div class="tab-pane" id="timeline">
+                                    <div class="card-body">
+                                        <strong><i class="fas fa fa-building mr-1"></i> Company Name</strong>
+                                        <p class="text-muted" id="txtCompanyName"></p>
+                                        <hr>
+                                        <strong><i class="fas fa-envelope"></i> Company Email</strong>
+                                        <p class="text-muted" id="txtCompanyEmail"></p>
+                                        <hr>
+                                        <strong><i class="fas fa-phone-alt mr-1"></i> Company Phone No.</strong>
+                                        <p class="text-muted" id="txtCompanyPhoneNo"></p>
+                                        <hr>
+                                        <strong><i class="fas fa-map-marker"></i> Company Address</strong>
+                                        <p class="text-muted" id="txtCompanyAddress"></p>
+                                        <hr>
+                                        <strong><i class="fas fa-map-marker"></i> Company Pincode</strong>
+                                        <p class="text-muted" id="txtCompanyPincode"></p>
+                                        <hr>
+                                        <strong><i class="fas fa-envelope"></i> Company PAN Card No</strong>
+                                        <p class="text-muted" id="txtPANCardNo"></p>
+                                        <hr>
+                                        <strong><i class="fas fa-envelope"></i> Company GSTNo</strong>
+                                        <p class="text-muted" id="txtCompanyGSTNo"></p>
+                                    </div>
+                                </div>
+                                <!-- /.tab-pane -->
+                                <div class="tab-pane" id="settings">
+                                    <div class="card-body" id="docdivid">
+
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="feestructure">
+                                    <div class="card-body" id="feedvid">
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="allocatedsupervisortab">
+                                    <div class="card-body" id="supervisordivid">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.tab-content -->
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.nav-tabs-custom -->
+                </div>
+                <!-- /.col -->
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<script src="~/ServiceScript/BaseUrl.js"></script>
+<script src="~/theams/plugins/jquery/jquery.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="~/ServiceScript/userAccountService.js"></script>
+<script src="~/ServiceScript/Service.js"></script>
+<script src="~/theams/dist/js/DatimePicker/jquery.simple-dtpicker.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var obj = JSON.parse(sessionStorage.userData);
+        debugger;
+        if (obj.user.userDetail != null) {
+            $('#fullName').text(obj.user.userDetail.fullName);
+            $('#alternate_email').text(obj.user.userDetail.alternateEmail);
+            $('#alternate_phoneno').text(obj.user.userDetail.alternateNumber);
+            $('#oAdharNo').text(obj.user.userDetail.userAdharCardNo);
+            $('#oPanNo').text(obj.user.userDetail.userPAN);
+        }
+        //$('#middle_name').text(obj.user.middleName);
+        //$('#last_name').text(obj.user.lastName);
+        $('#email').text(obj.user.email);
+        $('#phoneno').text(obj.user.phoneNumber);
+
+
+        $('#txtCompanyName').text(obj.companyName);
+        $('#txtCompanyEmail').text(obj.companyEmail);
+        $('#txtCompanyPhoneNo').text(obj.companyContactNo);
+        $('#txtCompanyAddress').text(obj.companyAddress);
+        $('#txtCompanyPincode').text(obj.companyZip);
+        $('#txtPANCardNo').text(obj.comapnyPAN);
+        $('#txtCompanyGSTNo').text(obj.companyGSTNo);
+
+        //sessionStorage.clear(sessionStorage.userData);
+        var docinfo = "";
+        var feeinfo = "";
+        var supervisorinfo = "";
+        if (obj.user.userDocument.length > 0) {
+            for (var i = 0; i < obj.user.userDocument.length; i++) {
+                docinfo += `<strong><i class="fas fa-id-card mr-1"></i>` + obj.user.userDocument[i].documentName + `</strong>
+                                        <p class="text-muted" id="adharcard"> `+ obj.user.userDocument[i].remark + `</p>
+                                         <input type="hidden" name="docname" id="kycdocnameid_`+ i + `" value="`+obj.user.userDocument[i].remark+`" />  
+                                         <a href ="#" style="color:blue; cursor: pointer;" id="`+ obj.user.userDocument[i].docFilePath + `" onclick="dowloaddoument(this,`+i+`);">Download</a>
+                                        <hr>`
+            };
+        }
+        else {
+            docinfo += `<strong><i class="fas fa-warning"></i>No Document Details Found !</strong>`
+        }
+        if (obj.user.feeDetails.length > 0) {
+            for (var i = 0; i < obj.user.feeDetails.length; i++) {
+                feeinfo += `<strong><i class="fa fa-money" aria-hidden="true"></i>` + obj.user.feeDetails[i].feeType + `</strong>
+                                        <p class="text-muted"><i class="fas fa-inr"></i>`+ obj.user.feeDetails[i].feeValue + `</p>
+                                        <hr>`
+            }
+            feeinfo += `<strong><i class="fa fa-money" aria-hidden="true"></i>Total Fee</strong><p class="text-muted"><i class="fas fa-inr"></i>` + obj.user.totalFee + `</p>
+                                        <hr>`
+            feeinfo += `<strong><i class="fa fa-money" aria-hidden="true"></i>Payment Terms</strong><p class="text-muted"><i class="fas fa-inr"></i>` + obj.user.feeDetails[0].paymentTerms + `</p>
+                                        <hr>`
+        } else { feeinfo += `<strong><i class="fas fa-warning"></i> No Fee Detail Found !</strong>` }
+
+        if (obj.user.supervisor != null) {
+            supervisorinfo += `<strong><i class="fas fa-user"></i> Name</strong>
+                                        <p class="text-muted">`+ obj.user.supervisor.name + `</p><hr>
+                                        <strong><i class="fas fa-envelope"></i> Email</strong>
+                                        <p class="text-muted">`+ obj.user.supervisor.email + `</p><hr>
+                                        <strong><i class="fas fa-phone"></i> Phone Number</strong>
+                                        <p class="text-muted">`+ obj.user.supervisor.contactNo + `</p>
+                                        <hr>`
+        }
+        else { supervisorinfo += `<strong><i class="fas fa-warning"></i> No Supervisor assigned !</strong>`}
+        $('#docdivid').html(docinfo);
+        $('#feedvid').html(feeinfo);
+        $('#supervisordivid').html(supervisorinfo);
+    });
+    function dowloaddoument(ctr, i) {
+        debugger;
+        var baseURLdw = baseurl + 'common/download';
+        let docName = $('#kycdocnameid_' + i + '').val();
+        downloadfile(baseURLdw, ctr.id, docName)
+    }
+</script>
+
+
+
+

@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewData["Title"] = "CommercialDetailView";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header bread">
+        <div class="container-fluid">
+            <div class="row mb-2 top-title">
+                <div class="col-sm-9">
+                    <h4>Franchise Details</h4>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card card-primary outer-row">
+                        <!-- /.card-header 1st section -->
+                        <div class="card-body myform">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="lblFranchiseeFee">Franchisee Fee</label>
+                                        <span style="color:red">*</span>
+                                        <input type="text" class="form-control required summition input-sm" id="txtFranchiseeFee" name="FranchiseeFee" placeholder=" Enter Franchisee Fee" onblur="ThresholdChecking()" onkeypress="return isNumberKey(event);">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="lblInitialDisposableStockCost">Other Fee / Cost</label>
+                                        <span style="color:red">*</span>
+                                        <input type="text" class="form-control required summition input-sm" id="txtOtherFee" name="DisposableStockCost" placeholder=" Enter Utility Item Cost" onkeypress="return isNumberKey(event);">
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="lblFixedMonthlyFee"> Fixed Monthly Fee </label>
+                                        <input type="text" class="form-control input-sm" id="txtFixedMonthlyFee" name="FixedMonthlyFee" placeholder="Enter Fixed Monthly Fee" onchange="fixmonthly()" onkeypress="return isNumberKey(event);">
+                                        <span class="error" id="errorFixedMonthly" style="display:none; color:red"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lblThresholdAmount">Minimum Threshold Due Amount</label>
+                                        <span style="color:red">*</span>
+                                        <input type="text" class="form-control required thresholdypercentage input-sm" id="txtThresholdAmount" name="ThresholdAmount" onblur="myFunction()" onkeypress="return isNumberKey(event);" placeholder="Threshold Due Amount">
+                                        <span class="error" id="errorThreshold" style="display:none; color:red"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="lblTotalAmount">Total Amount </label>
+                                        <span style="color:red">*</span>
+                                        <input type="text" class="form-control required summitiontotal input-sm" id="txtTotalAmount" name="TotalAmountDue" readonly="readonly" placeholder="Total Amount">
+                                    </div>
+                                    <div class="box-footer">
+                                        <button type="button" id="btnCancel" onclick="location.href='@Url.Action("Index","Admin")'" class="btn btn-warning"><b>Cancel</b></button>
+                                        <button type="submit" id="btnAdd" class="btn btn-success"><b>Save</b></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script type="text/javascript">
+    function CheckRequiredFields() {
+        debugger;
+        var isValid = true;
+        $('.required').each(function () {
+            if ($.trim($(this).val()) == '') {
+                debugger;
+                isValid = false;
+                $(this).addClass('red_border');
+            }
+            else {
+                $(this).removeClass('red_border');
+            }
+        });
+        return isValid;
+    }
+    function isNumberKey(evt) {
+        var charcode = (evt.which) ? evt.which : evt.keycode
+        if (charcode > 31 && (charcode < 48 || charcode > 58)
+            && evt.keyCode != 35 && evt.keyCode != 36 && evt.keyCode != 37
+            && evt.keyCode != 38 && evt.keyCode != 39 && evt.keyCode != 40
+            && evt.keyCode != 46) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    function commercialdetailsubmit() {
+        if (CheckRequiredFields()) {
+            var formData = new FormData();
+            let franchiseefeeval = $('#txtFranchiseeFee').val();
+            let otherfeeval = $('#txtOtherFee').val();
+            let fixedfeeval = $('#txtFixedMonthlyFee').val();
+            let thresholdval = $('#txtThresholdAmount').val();
+            formData.append("FranchiseeFee", franchiseefeeval);
+            formData.append("OtherFee", otherfeeval);
+            formData.append("FixedMonthlyFee", fixedfeeval);
+            formData.append("ThresholdAmount", thresholdval);
+            datasave('Franchisee/franchiseeitselfprofileupdate', formData).then(data => {
+                if (data.data !== null) {
+                    window.location = "/Account/GetUserDetail";
+                }
+            });;
+        }
+    }
+</script>

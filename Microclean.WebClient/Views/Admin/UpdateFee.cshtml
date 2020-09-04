@@ -1,0 +1,256 @@
+﻿<style>
+    .error {
+        color: red;
+        width: 100%;
+        margin-bottom: 0px;
+    }
+    .red_border {
+        border-color: red !important;
+    }
+    .astrick {
+        color: red;
+        position: absolute;
+        margin-top: -41px;
+        margin-left: 213px;
+    }
+    .tableFixHead {
+        overflow-y: auto;
+        height: 100px;
+    }
+
+    .input-wrapper {
+        display: inline-block;
+        position: relative
+    }
+
+    .input-wrapper:after {
+        font-family: 'FontAwesome';
+        content: '\f274';
+        position: absolute;
+        right: 0px;
+        margin-top: -28px
+    }
+</style>
+
+<link href="~/theams/microclean_payment.css" rel="stylesheet" />
+<link href="~/theams/dist/css/DatePicker/jquery.datetimepicker.min.css" rel="stylesheet" />
+<div class="modal fade" id="modal_Payment">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Payment Acknowledgement Details</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body table-responsive p-0">
+
+                                <input type="hidden" value="1" id="hidFranchiseeFeeType" />
+                                <input type="hidden" id="hidFranchiseeFeeId" />
+                                <input type="hidden" value="2" id="hidOtherFeeType" />
+                                <input type="hidden" id="hidOtherFeeid" />
+
+                                <table class="table table-hover text-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>Payment <br>Type</th>
+                                            <th>Payment <br>Due</th>
+                                            <th>Previous <br>Paid Amount</th>
+                                            <th>Previous <br>Balance Amount</th>
+                                            <th>Amount <br>received</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>Franchisee Fee</th>
+                                            <td><input type="text" style="width: 125px;" id="franchiseeFeePaymentDue" disabled="disabled" name="frpayment"></td>
+                                            <td><input type="text" style="width: 125px;" id="franchiseeFeePreviousPaidAmount" disabled="disabled" name="frpayment"></td>
+                                            <td><input type="text" style="width: 125px;" id="franchiseeFeePreviousBalAmount" disabled="disabled" name="frpayment"></td>
+                                            <td>
+                                                <input type="number" class="form-control updatesum required1" id="franchiseeFeeAmtReceived" min="0" name="frpayment">
+                                                <span class="astrick">*</span>
+                                                <span class="error" id="spanFranchiseeFeePayment" style="display:none; color:red">Payment shouldn't be grater than balance amount</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>Other Fee</th>
+                                            <td><input type="text" style="width: 125px;" id="OtherFeePaymentDue" disabled="disabled" name="frpayment"></td>
+                                            <td><input type="text" style="width: 125px;" id="OtherFeePreviousPaidAmount" disabled="disabled" name="frpayment"></td>
+                                            <td><input type="text" style="width: 125px;" id="OtherFeePreviousBalAmount" disabled="disabled" name="frpayment"></td>
+                                            <td>
+                                                <input type="number" class="form-control updatesum required1" id="OtherFeeAmtReceived" min="0" name="frpayment">
+                                                <span class="astrick">*</span>
+                                                <span class="error" id="spanOtherFeePayment" style="display:none; color:red">Payment shouldn't be grater than balance amount</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total Amount</th>
+                                            <td><input type="text" style="width: 125px;" id="totalPaymentDue" disabled="disabled" name="frpayment"></td>
+                                            <td><input type="text" style="width: 125px;" id="totalPreviousPaidAmount" disabled="disabled" name="frpayment"></td>
+                                            <td><input type="text" style="width: 125px;" id="totalPreviousBalAmount" disabled="disabled" name="frpayment"></td>
+                                            <td><input type="text" class="form-control totalupdatesumtotal" id="totalAmtReceived" disabled="disabled" name="frpayment" placeholder="Show Total Amount"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Payment  Mode</th>
+                                            <td>
+                                                <select name="payment" class="form-control required1" id="PaymentTypeMode">
+                                                    <option value="0">-Payment Type-</option>
+                                                    <option value="1">Cheque</option>
+                                                    <option value="2">NEFT</option>
+                                                    <option value="3">Wallet</option>
+                                                    <option value="4">Cash</option>
+                                                </select>
+                                                <span style="color:red; position: absolute;margin-top: -40px;margin-left: -9px;">*</span>
+                                                <span class="error" id="error_ddl" style="display:none; color:red"></span>
+                                            </td>
+                                            <td colspan="2">
+                                                <div class="input-group date input-wrapper" id="reservationdate" data-target-input="nearest">
+                                                    <input type="text" class="required1 input-sm form-control" autocomplete="off" id="paymentDate" name="Duedate" placeholder="dd-mm-yyyy">
+                                                    <span style="color:red;margin-top: -10px;">*</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control required1" placeholder="Enter Payment Ref" id="paymentRef" name="frpayment">
+                                                <span class="astrick">*</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Remark/Comment</th>
+                                            <td colspan="3">  <textarea class="form-control" rows="2" id="txtDescription" placeholder="Description"></textarea></td>
+                                            <td>
+                                                <div class="card-footer mysubmit-popup">
+                                                    <button type="submit" class="btn btn-primary" onclick="commercialUpdate();" id="btnUpdatePayment" disabled="disabled">Save</button>
+                                                    <button type="button" class="btn btn-primary btn-danger" data-dismiss="modal">Cancel</button>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="box-body table-responsive tableFixHead">
+                                    <table class="table table-hover text-nowrap striped">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                @*<th>Payment Type</th>*@
+                                                <th>Payment Date</th>
+                                                <th>Reference No</th>
+                                                <th>Payment Type </th>
+                                                <th>Amount Paid</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="tbody">
+                                        </tbody>
+                                    </table>
+                                </div>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="~/ServiceScript/BaseUrl.js"></script>
+<script src="~/ServiceScript/Service.js"></script>
+<script src="~/ServiceScript/feeValidation.js"></script>
+<script src="~/ServiceScript/paymentData.js"></script>
+<script src="~/ServiceScript/Validation/paymentUpdateValidation.js"></script>
+<script src="~/theams/dist/js/DatimePicker/jquery.datetimepicker.js"></script>
+<script type="text/javascript">
+    $('#paymentDate').datetimepicker({     
+        timepicker: false,
+        //minDate: 0,
+        maxDate: 0,
+        format: 'd/m/yy'
+     //minDate:'-1970/01/02', //yesterday is minimum date    
+     //maxDate:'+1970/01/02' //tomorrow is maximum date      
+});
+
+    $(document).ready(function () {
+        EnableDigitValidation();
+        var userid = sessionStorage.userId;
+        var url = 'company/getfeedetailbyuserid'
+        GetFeeData(url, userid).then(data => {
+            console.log(data);
+            debugger;
+            //var obj = JSON.stringify(data.data);
+            var html = '';
+            var a = 1;
+            //if (data.data.paymentDetails != null) {
+            if (data.data.feeDetails.length != 0) {
+                for (var i = 0; i < data.data.paymentDetails.length; i++) {
+                    html += '<tr>';
+                    html += '<td>' + a++ + '</td>';
+                    //html += '<td>' + data.data.paymentDetails[i].feeType + '</td>';
+                    html += '<td>' + data.data.paymentDetails[i].paymentDate + '</td>';
+                    html += '<td>' + data.data.paymentDetails[i].paymentRef + '</td>';
+                    html += '<td>' + data.data.paymentDetails[i].paymentType + '</td>';
+                    html += '<td>' + parseFloat(data.data.paymentDetails[i].paidAmout).toFixed(2) + '</td>';
+                    html += '</tr>';
+                }
+                $('.tbody').html(html);
+
+                var fBal = "";
+                var oBal = "";
+                for (var i = 0; i < data.data.feeDetails.length; i++) {
+                    if (data.data.feeDetails[i].feeTypeId == 1) {
+                        $('#franchiseeFeePaymentDue').val(parseFloat(data.data.feeDetails[i].feeValue).toFixed(2));
+                        $('#franchiseeFeePreviousPaidAmount').val(parseFloat(data.data.feeDetails[i].previousPaidAmount).toFixed(2));
+                        $('#franchiseeFeePreviousBalAmount').val(parseFloat(data.data.feeDetails[i].previousBalanceAmount).toFixed(2));
+                        fBal = data.data.feeDetails[i].previousBalanceAmount;
+                        if (fBal == 0) {
+                            $("#franchiseeFeeAmtReceived").attr("disabled", "disabled");
+                            $("#franchiseeFeeAmtReceived").val(parseFloat(fBal).toFixed(2));
+                        }
+                    }
+                    if (data.data.feeDetails[i].feeTypeId == 2) {
+                        $('#OtherFeePaymentDue').val(parseFloat(data.data.feeDetails[i].feeValue).toFixed(2));
+                        $('#OtherFeePreviousPaidAmount').val(parseFloat(data.data.feeDetails[i].previousPaidAmount).toFixed(2));
+                        $('#OtherFeePreviousBalAmount').val(parseFloat(data.data.feeDetails[i].previousBalanceAmount).toFixed(2));
+                        oBal = data.data.feeDetails[i].previousBalanceAmount;
+                        if (oBal == 0) {
+                            $("#OtherFeeAmtReceived").attr("disabled", "disabled");
+                            $("#OtherFeeAmtReceived").val(parseFloat(oBal).toFixed(2));
+                        }
+                    }
+                }
+                var totalPaymentDue = parseFloat($("#franchiseeFeePaymentDue").val()) + parseFloat($("#OtherFeePaymentDue").val());
+                var totalAmountPaid = parseFloat($("#franchiseeFeePreviousPaidAmount").val()) + parseFloat($("#OtherFeePreviousPaidAmount").val());
+                var totalBalanceAmount = parseFloat($("#franchiseeFeePreviousBalAmount").val()) + parseFloat($("#OtherFeePreviousBalAmount").val());
+                $('#totalPaymentDue').val(parseFloat(totalPaymentDue).toFixed(2));
+                $('#totalPreviousPaidAmount').val(parseFloat(totalAmountPaid).toFixed(2));
+                $('#totalPreviousBalAmount').val(parseFloat(totalBalanceAmount).toFixed(2));
+
+                $('#hidFranchiseeFeeId').val(data.data.feeDetails[0].feeId);
+                $('#hidOtherFeeid').val(data.data.feeDetails[1].feeId);
+            }
+            else {
+                $('#franchiseeFeePaymentDue').val(parseFloat(0).toFixed(2));
+                $('#franchiseeFeePreviousPaidAmount').val(parseFloat(0).toFixed(2));
+                $('#franchiseeFeePreviousBalAmount').val(parseFloat(0).toFixed(2));
+                $('#OtherFeePaymentDue').val(parseFloat(0).toFixed(2));
+                $('#OtherFeePreviousPaidAmount').val(parseFloat(0).toFixed(2));
+                $('#OtherFeePreviousBalAmount').val(parseFloat(0).toFixed(2));
+                $('#totalPaymentDue').val(parseFloat(0).toFixed(2));
+                $('#totalPreviousPaidAmount').val(parseFloat(0).toFixed(2));
+                $('#totalPreviousBalAmount').val(parseFloat(0).toFixed(2));
+            }
+        });
+    });
+</script>
+    

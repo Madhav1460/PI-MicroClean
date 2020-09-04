@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Test";
+    Layout = "~/Views/Shared/_FranchiseeUserLayout.cshtml";
+}
+<section id="myselection">
+    <div class="container mycenter">
+        <div class="row">
+        </div>
+    </div>
+</section>
+<section id="ourvideos">
+    <div class="container mybg">
+        <div class="row mycolor">
+            <div class="col-md-12"><h2>PI INFOTECH TEST</h2></div>
+        </div>
+        <div class="card card-primary outer-row">
+            <div class="card-body myform">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table id="testtable" class="table table-bordered table-striped tblbackground" style="border-top: 1px solid #ccc;">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Test</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodydataid">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+
+        <div id="loadtestdata"></div>
+    </div>
+</section>
+<script src="~/ServiceScript/BaseUrl.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="~/ServiceScript/Service.js"></script>
+<script src="~/ServiceScript/FranchiseeUserTest.js"></script>
+<script src="~/ServiceScript/Quiz.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        LoadPagedata();
+    });
+</script>

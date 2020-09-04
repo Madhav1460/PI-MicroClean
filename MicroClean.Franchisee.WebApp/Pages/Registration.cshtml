@@ -1,0 +1,195 @@
+﻿@page
+@model MicroClean.Franchisee.WebApp.RegistrationModel
+@{
+    ViewData["Title"] = "Registration";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Microclean | Register</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="microstyle.css" rel="stylesheet">
+</head>
+<body class="hold-transition">
+
+    <!------ Custome Header start---------->
+    <section id="header-style">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-7 col-sm-6 col-lg-3 left">
+                    <div class="logo-img"><img src="./micro-clean.jpeg"></div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-lg-9 right">
+                    <div class="social-links">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="menu-style">
+        <div class="container">
+            <div class="row menu-row">
+            </div>
+        </div>
+    </section>
+
+    <!--------End Header------- ----->
+    <section id="logins">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body register-card-body">
+                            <p class="login-box-msg mregister">Register a new membership</p>
+
+                            <form action="../../index.html" method="post">
+                                <div class="row onerow">
+                                    <div class="col-md-6 onecol">
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" placeholder="Full name">
+                                            <div class="input-group-append">
+                                                <div class="input-group-text">
+                                                    <span class="fas fa-user"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 secondcol">
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" placeholder="Last name">
+                                            <div class="input-group-append">
+                                                <div class="input-group-text">
+                                                    <span class="fas fa-user"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="email" class="form-control" placeholder="Email">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-envelope"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="phone" class="form-control" placeholder="Phone">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fa fa-phone"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="password" class="form-control" placeholder="Password">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-lock"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="password" class="form-control" placeholder="Retype password">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-lock"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-8">
+                                        <div class="icheck-primary">
+                                            <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                                            <label for="agreeTerms">
+                                                I agree to the <a href="#">terms</a>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!-- /.col -->
+                                    <div class="col-4">
+                                        <button type="submit" class="btn btn-primary btn-block">Register</button>
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                            </form>
+
+                            <div class="social-auth-links text-center">
+                                <p>- OR -</p>
+                                <a href="#" class="btn btn-block btn-primary">
+                                    <i class="fab fa-facebook mr-2"></i>
+                                    Sign up using Facebook
+                                </a>
+                                <a href="#" class="btn btn-block btn-danger">
+                                    <i class="fab fa-google-plus mr-2"></i>
+                                    Sign up using Google+
+                                </a>
+                            </div>
+
+                            <a href="micro-login.html" class="text-center">I already have a membership</a>
+                        </div>
+                        <!-- /.form-box -->
+                    </div><!-- /.card -->
+
+                </div>
+                <div class="col-md-3">
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- /.login-box -->
+    <!---  custome footer --->
+    <section id="footer-style">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4 text-center">
+                    <div class="social_icon">
+                        <ul>
+                            <li><a target="_blank" href="#"><i class="fa fa-youtube"></i></a></li>
+                            <li><a target="_blank" href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a target="_blank" href="#"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="copyright">
+                        © 2019 <a title="Pi Infotech" target="_blank" href="https://www.pi-infotech.com/">Pi Infotech</a>. All Rights Reserved.
+                    </div>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+        </div>
+    </section>  
+
+</body>
+</html>
+
+

@@ -1,0 +1,85 @@
+﻿@{
+    ViewData["Title"] = "Start Quiz";
+    Layout = "~/Views/Shared/_FranchiseeUserLayout.cshtml";
+}
+<link href="~/theams/quiz.css" rel="stylesheet" />
+<link href="~/theams/dist/css/style.css" rel="stylesheet" />
+<link href="~/theams/custom-loder.css" rel="stylesheet" />
+<script src="~/theams/plugins/jquery/jquery.min.js"></script>
+<section id="ourvideos">
+    <div id="overlay1">
+        <p style="position: absolute; color: White; top: 50%; left: 45%;">
+            Loading, please wait...
+            <img src="~/Images/ajax-loader4.gif" alt="Loader" style="width:105px;height:76px" />
+        </p>
+    </div>
+
+    <link href="~/theams/custom-loder.css" rel="stylesheet" />
+    <div class="container mybg">
+        <div class="row mycolor">
+            <div class="col-md-12"><h2>Online Test</h2></div>
+        </div>
+        <div class="video_scroll">
+            <div class="row inner-row">
+                <div class="col-md-8">
+                    <div class="form-group clearfix">
+                        <div id="quizdatatab">
+                        </div>
+                        <div style="overflow: auto;">
+                            <div style="float: right;">
+                                @*<button type="button" id="prevBtn" onclick="nextPrev(-1)">
+                                        Previous
+                                    </button>*@
+                                <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                            </div>
+                        </div>
+                        <!-- Circles which indicates the steps of the form: -->
+                        <div style="text-align: center; margin-top: 40px;">
+                            <div id="stepid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" style="border-left: 1px solid #0879fa14;">
+                    <div class="title">
+                        Time Remaining
+                        <h3></h3>
+                        <div class="count"><div id="timer"></div></div>
+                    </div>
+                    <div class="myborder"></div>
+                    @*<div class="row status-inne">
+                        <div class="col-sm-3 col-4">
+                            <a href="">ALL</a>
+                            <div class="count">10</div>
+                        </div>
+                        <div class="col-sm-3 col-4">
+                            <a href="">PENDING</a>
+                            <div class="count">5</div>
+                        </div>
+                        <div class="col-sm-3 col-4">
+                            <a href="">ATTEMPTED</a>
+                            <div class="count">5</div>
+                        </div>
+                        <div class="col-sm-3"></div>
+                    </div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="~/theams/plugins/jquery/jquery.min.js"></script>
+<script src="~/ServiceScript/BaseUrl.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="~/ServiceScript/Service.js"></script>
+<script src="~/ServiceScript/Quiz.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var testid = 0;
+        if (@ViewBag.testid != null) {
+            testid = '@ViewBag.testid';
+        }
+        GetQuiz(testid);
+    });
+    showTimer();
+</script>

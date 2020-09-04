@@ -1,0 +1,163 @@
+﻿
+@{
+    ViewData["Title"] = "TestConfigure";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link href="~/theams/dist/css/DatePicker/jquery.datetimepicker.css" rel="stylesheet" />
+<!-- Optional theme -->
+<style type="text/css">
+    .custom-date-style {
+        background-color: red !important;
+    }
+
+    .input {
+    }
+
+    .input-wide {
+        width: 300px;
+    }
+</style>
+
+<section class="content">
+    @if (ViewBag.SuccessMessage != null)
+    {
+        <div id="divMessage">
+            <div class="alert alert-success"><a href="#" class="close" data-dismiss="alert">&times;</a> @ViewBag.SuccessMessage</div>
+        </div>
+    }
+    @if (ViewBag.FailureMessage != null)
+    {
+        <div id="divMessage">
+            <div class="alert alert-error"><a href="#" class="close" data-dismiss="alert">&times;</a> @ViewBag.FailureMessage</div>
+        </div>
+    }
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header bread">
+            <div class="container-fluid">
+                <div class="row mb-2 top-title">
+                    <div class="col-sm-9">
+                        <h4>Configure New Test</h4>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row ">
+                    <div class="col-12">
+                        <div class="card card-primary outer-row">
+                            <!-- /.card-header 1st section -->
+                            <div class="card-body myform">
+                                <div class="row">
+                                    <div class="col-sm-4 col-6">
+                                        <div class="form-group">
+                                            <label>Category</label>
+                                            <select id="drpcategory" name="CategoryId" data-val="true" data-val-required="Category is required." class="form-control select2">
+                                                <option value="0">Select</option>
+                                                <option value="1">Services</option>
+                                                <option value="2">Maintainance</option>
+                                                <option value="3">Delivery</option>
+                                            </select>
+                                            <span id="errorcategory" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-6">
+                                        <div class="form-group">
+                                            <label> Test Name</label>
+                                            <input type="hidden" name="TestId" id="txtid" />
+                                            <input id="txtnameId" class="form-control" placeholder="Enter Name" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-6">
+                                        <div class="form-group">
+                                            <label>No. Of Questions</label>
+                                            <input id="txtnoOfQuestionId" class="form-control onlyInt" placeholder="No Of Questions" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-4 col-6">
+                                        <div class="form-group">
+                                            <label>Start Date Time</label>
+                                            <div class='input-group date' id='datetimepicker6'>
+                                                <input id="startDateString" type='text' class="form-control" autocomplete="off" placeholder="Start Date Time" />
+                                                <div class="input-group-append" data-target="#datetimepicker6" data-toggle="datetimepicker">
+                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-6">
+                                        <div class="form-group">
+                                            <label>End Date Time</label>
+                                            <div class='input-group' id='datetimepicker7'>
+                                                <input id="EndDateString" type='text' class="form-control" autocomplete="off" placeholder="End Date Time" />
+                                                <div class="input-group-append" data-target="#datetimepicker7" data-toggle="datetimepicker">
+                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <div class="form-group">
+                                            <label> Test Description</label>
+                                            <textarea id="txtDescriptionId" class="form-control" rows="3" placeholder="Description"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="assing test-template">
+                                            @*<a target="_blank" href="./download_test_templates.xlsx">Download Test Templates</a>*@
+                                        </div>
+                                        <div class="col-sm-4">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-6">
+                                        <div class="card-footer mysubmit2">
+                                            <button type="button" onclick="openFile(); return dateValidation();" class="btn btn-primary" id="btnadd">Add</button>
+                                            <button type="button" onclick="cancelUploding();" class="btn btn-danger">Cancel</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 col-6">
+                                        <div class="card-footer register_membership">
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+    </div>
+</section>
+<script src="~/theams/plugins/jquery/jquery.min.js"></script>
+<script src="~/theams/dist/js/DatimePicker/jquery.datetimepicker.full.js"></script>
+<script src="~/theams/dist/js/DatimePicker/Script_Module.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="~/ServiceScript/BaseUrl.js"></script>
+<script src="~/ServiceScript/Service.js"></script>
+<script src="~/ServiceScript/TestConfigure.js"></script>
+

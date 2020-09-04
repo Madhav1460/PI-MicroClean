@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "Result";
+    Layout = "~/Views/Shared/_FranchiseeUserLayout.cshtml";
+}
+<section id="ourvideos">
+    <div class="container mybg">
+        <div class="row mycolor">
+            <div class="col-md-12">
+                <h2>Result</h2>
+            </div>
+        </div>
+        <div class="video_scroll">
+            <div class="row inner-row">
+                <div class="col-md-2">
+                    <div class="row view-button">
+                        <h2>Total Result</h2>
+                    </div>
+                </div>
+                <div id="quizresultdatatab"></div>
+                <div class="col-md-2">
+                </div>
+                <div class="row status-inner">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <div class="card-footer register_membership">
+                            <a href="/test" class="btn btn-primary">Test Detail</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="~/ServiceScript/BaseUrl.js"></script>
+<script src="~/ServiceScript/Service.js"></script>
+<script src="~/ServiceScript/result.js"></script>
+<script>
+    $(document).ready(function () {
+        var testid = 0;
+        if (@ViewBag.testid != null) {
+            testid = '@ViewBag.testid';
+        }
+        GetResult(testid);
+    });
+</script>

@@ -1,0 +1,578 @@
+﻿
+@{
+    ViewData["Title"] = "CreateFranchisee";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link href="~/theams/micro-custom.css" rel="stylesheet" />
+<link href="~/theams/dist/css/DatePicker/jquery.simple-dtpicker.css" rel="stylesheet" />
+<link href="~/theams/Toaster/ToasterCSS/toastr.css" rel="stylesheet" />
+<script src="~/ServiceScript/Common.js"></script>
+<style>
+    .error {
+        color: red;
+        width: 100%;
+        margin-bottom: 0px;
+    }
+
+    .red_border {
+        border-color: red !important;
+    }
+
+    .login-card-body .input-group .form-control, .register-card-body .input-group .form-control {
+        border-right: 1px solid #ced4da;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        GetAllState();
+    });
+</script>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header bread">
+        <div class="container-fluid">
+            <div class="row mb-2 top-title">
+                <div class="col-sm-6">
+                    <h4>Create Franchisee</h4>
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card card-primary outer-row">
+                        <!-- /.card-header 1st section -->
+                        <form role="form" id="quickForm" enctype="multipart/form-data">
+                            <div class="card-body myform">
+                                <div class="row">
+                                    <div class="col-sm-4 col-4">
+                                        <div class="form-group">
+                                            <label>First Name</label>
+                                            <span style="color: red;">*</span>
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control required" id="txtfrstname" placeholder="Enter First Name">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-4">
+                                        <div class="form-group">
+                                            <label>Middle Name</label>
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control" id="txtmiddlename" placeholder="Enter Middle Name">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-4">
+                                        <div class="form-group">
+                                            <label>Last Name</label>
+                                            <span style="color: red;">*</span>
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control required" id="txtlastname" placeholder="Enter Last name">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4 col-4">
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <span style="color: red;">*</span>
+                                            <div class="input-group mb-3">
+                                                <input type="email" class="form-control required" placeholder="Enter Email" id="txtemail" onblur="validateEmail(this)">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                                </div>
+                                                <span class="error" id="error_email" style="display: none;"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-4">
+                                        <div class="form-group">
+                                            <label>Password</label>
+                                            <span style="color: red;">*</span>
+                                            <div class="input-group mb-3">
+                                                <input type="password" class="form-control required" placeholder="Enter Password" id="txtpassword" onblur="validatePassword(this);">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4 col-4">
+                                        <div class="form-group">
+                                            <label>Confirm Password</label>
+                                            <span style="color: red;">*</span>
+                                            <div class="input-group mb-3">
+                                                <input type="password" class="form-control required" placeholder="Enter Confirm Password" id="txtreinterpassword" onblur="validatePassword(this);">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                                </div>
+                                                <span class="error" id="error_confirm_password" style="display:none;"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-4 col-4">
+                                        <div class="form-group">
+                                            <label>Phone no.</label>
+                                            <span style="color: red;">*</span>
+                                            <div class="input-group mb-3">
+                                                <input type="text" name="phone" class="form-control required" id="txtphone" placeholder="Enter Phone No" maxlength="10" onkeypress="return isNumberKey(event);" onblur="lentest()" title="10-digits" >
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-4">
+                                        <div class="form-group">
+                                            <label>Alternate Email</label>
+                                            <div class="input-group mb-3">
+                                                <input type="email" class="form-control" placeholder="Enter Alternate Email" id="txtAlternateEmail" onblur="validateAlternameEmail(this)">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                                </div>
+                                                <span class="error" id="Altererror_email" style="display: none;"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-4">
+                                        <div class="form-group">
+                                            <label>Alternate No</label>
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control" placeholder="Enter Alternate No" id="txtAlternateNumber" maxlength="10" onkeypress="return isNumberKey(event);" onchange="lentestaltno()" title="10-digits">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4 col-4">
+                                        <div class="form-group">
+                                            <label>State</label>
+                                            <span style="color: red;">*</span>
+                                            <div class="input-group mb-3">
+                                                <select class="form-control" onchange="getAppCityByState(this);" id="ddlState"></select>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-4">
+                                        <div class="form-group">
+                                            <label>District/city</label>
+                                            <span style="color: red;">*</span>
+                                            <div class="input-group mb-3">
+                                                <select class="form-control" id="ddlCity"></select>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-4">
+                                        <div class="form-group">
+                                            <label>Pincode</label>
+                                            <span style="color: red;">*</span>
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control required" placeholder="Enter Pincode" id="txtPincode" maxlength="6" onkeypress="return isNumberKey(event);" onchange=" pinlength()">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fa fa-map-pin" aria-hidden="true"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-4 col-4">
+                                        <div class="form-group">
+                                            <label>Company Name</label>
+                                            <span style="color: red;">*</span>
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control required" placeholder="Enter Company Name" id="txtCompanyName">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fa fa-building" aria-hidden="true"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-4">
+                                        <div class="form-group">
+                                            <label>Company Email</label>
+                                            <span style="color: red;">*</span>
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control required" placeholder="Enter Company Email" id="txtCompanyEmail" onblur="validateCompanyEmail(this)">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                                </div>
+                                                <span class="error" id="error_companyemail" style="display: none;"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-4">
+                                        <div class="form-group">
+                                            <label>Company Phone No</label>
+                                            <span style="color: red;">*</span>
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control required" placeholder="Enter Phone No" maxlength="10" id="txtCompanyPhoneno" onkeypress="return isNumberKey(event);">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-4">
+                                        <div class="form-group">
+                                            <label>Address</label>
+                                            <span style="color: red;">*</span>
+                                            <div class="input-group mb-3">
+                                                <textarea class="form-control required" id="txtAddress" rows="2"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="card-footer register_membership">
+                                            <button type="button" onclick="franchiseeRegistrationByAdmin();" id="btnsubmit" class="btn btn-primary">Save</button>
+                                            <a href="/Admin/Index" class="btn btn-danger">Cancel</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </form>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+
+<!-- Ion Slider -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="~/theams/plugins/jquery/jquery.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="~/ServiceScript/userAccountService.js"></script>
+<script src="~/ServiceScript/Service.js"></script>
+<script src="~/theams/dist/js/DatimePicker/jquery.simple-dtpicker.js"></script>
+<script src="~/ServiceScript/BaseUrl.js"></script>
+<script src="~/theams/Toaster/ToasterJS/toastr.js"></script>
+
+<script type="text/javascript">
+
+    $('#txtDob').appendDtpicker({
+        "dateOnly": true,
+        "closeButton": true,
+        "futureOnly": false,
+        "dateFormat": "DD/MM/YYYY",
+    });
+    $(function () {
+        $(document).on('click', '[data-role="dynamic-fields"] > .form-inline [data-role="add"]', function (e) {
+            e.preventDefault();
+
+            var ids = jQuery(".form-inline .docbox").last().attr("id");
+            if (typeof ids === "undefined") {
+                var ids = "docbox-0";
+            }
+            var res = ids.split("-");
+            var resele = res[1];
+            var k = Number(resele) + Number(1);
+
+            var pqr = '<option value="1">Aadhar Card</option> <option value="2">Pen Card</option>' +
+                '<option value="3">Passport</option>';
+            var ab = '<input type="hidden" id="hdnDocId_' + k + '" /><div class="docbox row" id="docbox-' + k + '" style="width:100%; margin-top:12px;"><div class="col-md-6 uploaddocument">' +
+                '<select class="form-control select2" required id="selectDocument_' + k + '" style="width: 100%;">' +
+                '' + pqr + '</select></div>' +
+                '<div class="col-md-6 uploadbutton" style="margin-top:-12px" >' +
+                '<div class="mb-2 mr-sm-2 wrap-input-container">' +
+                '<label class="custom-file-upload form-control">Upload Document</label>' +
+                '<input type="file" class="file-upload" id="docfile_' + k + '"></div>' +
+                ' <button class="btn btn-sm btn-danger  mb-2" data-role="remove" onclick="removeStep(' + k + ')"><i class="fa fa-minus"></i></button>' +
+                ' <button class="btn btn-sm btn-primary  mb-2" data-role="add"> <i class="fa fa-plus"></i></button>' +
+                '</div></div>';
+            var steplength = jQuery(".docbox").length;
+            if (steplength <= 2) {
+                jQuery(".form-inline").append(ab);
+                //$('.selectDocument'+k+' option[value='+selectedContact+']').attr('disabled','true');
+            }
+            else {
+                alert("No more file added");
+            }
+        }
+        );
+    });
+    function removeStep(i) {
+        $('#docbox-' + i).remove();
+    }
+
+    $(document).on('change', '.file-upload', function () {
+        //debugger;
+        var i = $(this).prev('label').clone();
+        var file = this.files[0].name;
+        $(this).prev('label').text(file);
+    });
+
+    function CheckRequiredFields() {
+        debugger;
+        var isValid = true;
+        $('.required').each(function () {
+            if ($.trim($(this).val()) == '') {
+                debugger;
+                isValid = false;
+                $(this).addClass('red_border');
+            }
+            else {
+                $(this).removeClass('red_border');
+            }
+        });
+        return isValid;
+    }
+
+    function validateEmail(email) {
+        if (email.value != '') {
+            var reg = /^[\w-\._\+%]+@@(?:[\w-]+\.)+[\w]{2,6}$/;
+            if (reg.test(email.value) == false) {
+                //alert('Invalid Email Address');
+                jQuery('#error_email').html("Invalid email address");
+                jQuery('#error_email').show();
+                document.getElementById("txtemail").value = '';
+                //document.signup_form.email.focus() ;
+                return false;
+            } else {
+                jQuery('#error_email').html("");
+                jQuery('#error_email').hide();
+            }
+            return true;
+        }
+    }
+    // Validate Alternate Email
+    function validateAlternameEmail(email) {
+        if (email != undefined && email != '') {
+            var reg = /^[\w-\._\+%]+@@(?:[\w-]+\.)+[\w]{2,6}$/;
+            if (reg.test(email.value) == false) {
+                $('#Altererror_email').html("Invalid email address");
+                $('#Altererror_email').show();
+                document.getElementById("txtAlternateEmail").value = '';
+                return false;
+            } else {
+                $('#Altererror_email').html("");
+                $('#Altererror_email').hide();
+            }
+            return true;
+        }
+    }
+    // Validate Company Email
+    function validateCompanyEmail(email) {
+        if (email != undefined && email != '') {
+            var reg = /^[\w-\._\+%]+@@(?:[\w-]+\.)+[\w]{2,6}$/;
+            if (reg.test(email.value) == false) {
+                $('#error_companyemail').html("Invalid email address");
+                $('#error_companyemail').show();
+                document.getElementById("txtCompanyEmail").value = '';
+                return false;
+            } else {
+                $('#error_companyemail').html("");
+                $('#error_companyemail').hide();
+            }
+            return true;
+        }
+    }
+
+    function validatePassword() {
+        //debugger;
+        //var password = $("#txtpassword").val();
+        var password = document.getElementById("txtpassword").value;
+        var confirmPassword = document.getElementById("txtreinterpassword").value;
+        //var confirmPassword = $("#txtreinterpassword").val();
+        if (password != confirmPassword) {
+            //alert("Password and Confirm Password do not match.");
+            $('#error_confirm_password').html("Password and Confirm Password do not match.");
+            $('#error_confirm_password').show();
+            //document.getElementById("password").value = '';
+            document.getElementById("txtreinterpassword").value = '';
+            //document.signup_form.password.focus() ;
+            return false;
+        } else {
+            $('#error_confirm_password').html("");
+            $('#error_confirm_password').hide();
+        }
+        return true;
+    }
+
+    function isNumberKey(evt) {
+        var charcode = (evt.which) ? evt.which : evt.keycode
+        if (charcode > 31 && (charcode < 48 || charcode > 58)
+            && evt.keyCode != 35 && evt.keyCode != 36 && evt.keyCode != 37
+            && evt.keyCode != 38 && evt.keyCode != 39 && evt.keyCode != 40
+            && evt.keyCode != 46) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function lentest() {
+        debugger;
+        var str = $("#txtPhone").val();
+        var pattern = new RegExp("^[0-9]{10}$");
+        if (pattern.test(str) == false) {
+            $("#txtPhone").val('');
+            $('#txtPhone').css('border-color', 'Red');
+        }
+    }
+    function lentestaltno() {
+        debugger;
+        var str = $("#txtAlternateNumber").val();
+        var pattern = new RegExp("^[0-9]{10}$");
+        if (pattern.test(str) == false) {
+            $("#txtAlternateNumber").val('');
+        }
+    }
+
+     function pinlength() {
+        debugger;
+        var str = $("#txtPincode").val();
+        var pattern = new RegExp("^[0-9]{6}$");
+        if (pattern.test(str) == false) {
+            $("#txtPincode").val('');
+             $('#txtPincode').css('border-color', 'Red');
+        }
+    }
+
+    $("#txtfrstname").keyup(function (e) {
+        var regex = /^[a-zA-Z]+$/;
+        if (regex.test(this.value) !== true)
+            this.value = this.value.replace(/[^a-zA-Z]+/, '');
+    });
+   
+    $("#txtmiddlename").keyup(function (e) {
+        var regex = /^[a-zA-Z]+$/;
+        if (regex.test(this.value) !== true)
+            this.value = this.value.replace(/[^a-zA-Z]+/, '');
+    });
+
+    $("#txtlastname").keyup(function (e) {
+        var regex = /^[a-zA-Z]+$/;
+        if (regex.test(this.value) !== true)
+            this.value = this.value.replace(/[^a-zA-Z]+/, '');
+    });
+
+    $("#txtCompanyName").keyup(function (e) {
+        var regex = /^[a-zA-Z0-9]+$/;
+        if (regex.test(this.value) !== true)
+            this.value = this.value.replace(/[^a-zA-Z0-9]+/, '');
+    });
+
+    $("#txtphone").keyup(function (e) {
+        var regex = /^\d{10}$/;
+        if (regex.test(this.value) !== true)
+            this.value = this.value.replace(/^\d{10}$/, '');
+    });
+
+    
+    $('#txtfrstname').keyup(function () {
+        var $this = $(this);
+        if ($this.val().trim() == "") {
+            $('#txtfrstname').css('border-color', 'Red');
+            isValid = false;
+        } else {
+            $('#txtfrstname').css('border-color', 'lightgrey');
+        }
+    });
+
+    $('#txtlastname').keyup(function () {
+        var $this = $(this);
+        if ($this.val().trim() == "") {
+            $('#txtlastname').css('border-color', 'Red');
+            isValid = false;
+        } else {
+            $('#txtlastname').css('border-color', 'lightgrey');
+        }
+    });
+    $('#txtemail').keyup(function () {
+        var $this = $(this);
+        if ($this.val().trim() == "") {
+            $('#txtemail').css('border-color', 'Red');
+            isValid = false;
+        } else {
+            $('#txtemail').css('border-color', 'lightgrey');
+        }
+    });
+    $('#txtphone').keyup(function () {
+        var $this = $(this);
+        if ($this.val().trim() == "") {
+            $('#txtphone').css('border-color', 'Red');
+            isValid = false;
+        } else {
+            $('#txtphone').css('border-color', 'lightgrey');
+        }
+    });
+    $('#txtpassword').keyup(function () {
+        var $this = $(this);
+        if ($this.val().trim() == "") {
+            $('#txtpassword').css('border-color', 'Red');
+            isValid = false;
+        } else {
+            $('#txtpassword').css('border-color', 'lightgrey');
+        }
+    });
+    $('#txtreinterpassword').keyup(function () {
+        var $this = $(this);
+        if ($this.val().trim() == "") {
+            $('#txtreinterpassword').css('border-color', 'Red');
+            isValid = false;
+        } else {
+            $('#txtreinterpassword').css('border-color', 'lightgrey');
+        }
+    });
+     $('#txtPincode').keyup(function () {
+        var $this = $(this);
+        if ($this.val().trim() == "") {
+            $('#txtPincode').css('border-color', 'Red');
+            isValid = false;
+        } else {
+            $('#txtPincode').css('border-color', 'lightgrey');
+        }
+    });
+
+
+</script>
+
+
+
+
+
+
+
+
+

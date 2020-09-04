@@ -1,0 +1,138 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .btn-disabled,
+    .btn-disabled[disabled] {
+        opacity: .4;
+        cursor: default !important;
+        pointer-events: none;
+    }
+
+    .modal-header {
+        padding: 15px !important;
+        border-bottom: 1px solid #e5e5e5 !important;
+        background: linear-gradient(#e9ff0091, #fdfdfd) !important;
+    }
+
+    div.dataTables_wrapper div.dataTables_length select {
+        /*width: 58px !important;*/
+        display: inline-block;
+    }
+
+    .abc {
+        width: auto !important;
+    }
+</style>
+<link rel="stylesheet" href="/theams/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="/theams/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+<link href="~/theams/Toaster/ToasterCSS/toastr.css" rel="stylesheet" />
+<link href="~/theams/custom-loder.css" rel="stylesheet" />
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header bread">
+        <div class="container-fluid">
+            <div class="row mb-2 top-title">
+                <div class="col-sm-9">
+                    <h4>Franchise Detail</h4>
+                </div>
+                <div class="col-sm-3">
+                    <div class="franchisee">
+                        <a href="/Admin/CreateFranchisee" role="button" class="btn btn-primary"><i class="fas fa-plus-square"></i> Create Franchisee</a>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div id="overlay1">
+                    <p style="position: absolute; color: White; top: 50%; left: 45%;">
+                        Loading, please wait...
+                        <img src="~/Images/ajax-loader4.gif" alt="Loader" style="width:105px;height:76px" />
+                    </p>
+                </div>
+                <div class="col-12">
+                    <div class="card card-primary outer-row">
+                        <!-- /.card-header 1st section -->
+                        <div class="card-body myform">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="tbluser" class="table table-bordered table-striped tblbackground dataTable dtr-inline">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Franchisee Name</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+    <div class="modal fade" id="empmodal_assign">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Assign Supervisor</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="myForm">
+                        <div class="form-group">
+                            <label for="lblItemCategory">Select Employee </label>&nbsp;&nbsp;
+                            <select id="employeeId" class="form-control" @*onchange="return searchUnit();"*@>
+                            </select>
+                            <span class="error" id="error_ddl" style="display:none; color:red"></span>
+                        </div>
+                        <input type="hidden" id="hdnEmployeeId" />
+                    </form>
+
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="btnAddEmployee">Save changes</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+</div>
+<div id="bootPoper">
+    <input type="hidden" name="name" value="" id="hdnuserid" />
+</div>
+<!-- /.content-wrapper -->
+<script src="/theams/plugins/jquery/jquery.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="~/ServiceScript/BaseUrl.js"></script>
+<script src="~/theams/Toaster/ToasterJS/toastr.js"></script>
+<script src="~/ServiceScript/paymentData.js"></script>
+<script src="~/ServiceScript/Validation/paymentUpdateValidation.js"></script>
+<script src="~/theams/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/theams/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="~/theams/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="~/ServiceScript/FranchiseeView.js"></script>
+

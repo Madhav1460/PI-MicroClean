@@ -1,0 +1,165 @@
+﻿@page
+@model MicroClean.Franchisee.WebApp.IndexModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_site.cshtml";
+}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header bread">
+        <div class="container-fluid">
+            <div class="row mb-2 top-title">
+                <div class="col-sm-6">
+                    <h4>Franchise Details</h4>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card card-primary outer-row">
+                        <!-- /.card-header 1st section -->
+                        <div class="card-body myform">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="example1" class="table table-bordered table-striped tblbackground">
+                                        <thead>
+                                            <tr>
+                                                <th>S.No.</th>
+                                                <th>Full Name</th>
+                                                <th>Last Name</th>
+                                                <th>Mobile No.</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>My First Video</td>
+                                                <td>Education for Physics specially force lession</td>
+                                                <td>+91-9898989898</td>
+                                                <td><a href="#"><i class="fas fa-edit"></i> Edit</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>My 2nd Video</td>
+                                                <td>Education for Physics specially force lession</td>
+                                                <td>+91-9898989898</td>
+                                                <td><a href="#"><i class="fas fa-edit"></i> Edit</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>My 3rd Video</td>
+                                                <td>Education for Physics specially force lession</td>
+                                                <td>+91-9898989898</td>
+                                                <td><a href="#"><i class="fas fa-edit"></i> Edit</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>My 4th Video</td>
+                                                <td>Education for Physics specially force lession</td>
+                                                <td>+91-9898989898</td>
+                                                <td><a href="#"><i class="fas fa-edit"></i> Edit</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>My fifth Video</td>
+                                                <td>Education for Physics specially force lession</td>
+                                                <td>+91-9898989898</td>
+                                                <td><a href="#"><i class="fas fa-edit"></i> Edit</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>6</td>
+                                                <td>My six Video</td>
+                                                <td>Education for Physics specially force lession</td>
+                                                <td>+91-9898989898</td>
+                                                <td><a href="#"><i class="fas fa-edit"></i> Edit</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>7</td>
+                                                <td>My 7th Video</td>
+                                                <td>Education for Physics specially force lession</td>
+                                                <td>+91-9898989898</td>
+                                                <td><a href="#"><i class="fas fa-edit"></i> Edit</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>8</td>
+                                                <td>My 8th Video</td>
+                                                <td>Education for Physics specially force lession</td>
+                                                <td>+91-9898989898</td>
+                                                <td><a href="#"><i class="fas fa-edit"></i> Edit</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>9</td>
+                                                <td>My 9th Video</td>
+                                                <td>Education for Physics specially force lession</td>
+                                                <td>+91-9898989898</td>
+                                                <td><a href="#"><i class="fas fa-edit"></i> Edit</a></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>10</td>
+                                                <td>My 10nth Video</td>
+                                                <td>Education for Physics specially force lession</td>
+                                                <td>+91-9898989898</td>
+                                                <td><a href="#"><i class="fas fa-edit"></i> Edit</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>11</td>
+                                                <td>My 11venth Video</td>
+                                                <td>Education for Physics specially force lession</td>
+                                                <td>+91-9898989898</td>
+                                                <td><a href="#"><i class="fas fa-edit"></i> Edit</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>12</td>
+                                                <td>My 12th Video</td>
+                                                <td>Education for Physics specially force lession</td>
+                                                <td>+91-9898989898</td>
+                                                <td><a href="#"><i class="fas fa-edit"></i> Edit</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<!-- Ion Slider -->
+<script src="~/theams/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/theams/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="~/theams/plugins/datatables-responsive/js/dataTables.responsive.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#example1").DataTable({
+            "responsive": true,
+            "autoWidth": false,
+        });
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+</script>

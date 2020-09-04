@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+   
+</style>
+<div class="content-wrapper tempbg">
+    <!-- Content Header (Page header) -->
+    <section class="content-header bread">
+        <div class="container-fluid">
+            <div class="row mb-2 top-title">
+                <div class="col-sm-6">
+                    <h4>Dashboard</h4>
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+
+    <section>
+        <!-- Info boxes -->
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-green"><i class="ion ion-ios-gear-outline"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text"><b>Total Active Users</b></span>
+                        <span class="info-box-number">@ViewBag.userCounts</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-red"><i class="ion ion-ios-cart-outline"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text"><b>Total  Active Franchisee</b></span>
+                        @*<span class="info-box-number">@ViewBag.franchiseCounts</span>*@
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+        </div>
+            <!-- /.col -->
+            <!-- fix for small devices only -->
+            <div class="clearfix visible-sm-block"></div>
+
+    </section>
+
+    <div class="row">
+        <!--Latest Franchisee -->
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h4 class="box-title">Latest Franchisee</h4>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="table-responsive">
+                        <table id="tblHome" class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Mobile</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody">
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+        <!--Latest Franchisee End -->
+    </div>
+    </div>
+    <script>
+    $(document).ready(function () {
+        loadData();
+    });
+
+    //Load Data function
+    function loadData() {
+        $.ajax({
+            url: '@Url.Action("GetLatestFranchiseeData")',
+            type: "GET",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                var html = '';
+                var i = 1;
+                $.each(result, function (key, item) {
+                    html += '<tr>';
+                    html += '<td>' + i++ + '</td>';
+                    html += '<td>' + item.FullName + '</td>';
+                    html += '<td>' + item.Email + '</td>';
+                    html += '<td>' + item.MobileNo + '</td>';
+                    html += '<td> <span class="label label-success">'+ item.Status+ '</span></td>';
+                    html += '</tr>';
+                });
+                $('.tbody').html(html);
+            },
+            error: function (errormessage) {
+                //alert(errormessage.responseText);
+            }
+        });
+    }
+
+    </script>
+

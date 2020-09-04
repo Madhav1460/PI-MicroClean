@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewData["Title"] = "QuestionDetail";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@*<script src="~/Helper/util.js"></script>*@
+<script src="~/theams/plugins/jquery/jquery.min.js"></script>
+<script src="~/ServiceScript/onlineQuestion.js"></script>
+<style>
+    div.dataTables_wrapper div.dataTables_length select {
+        width: 58px !important;
+        display: inline-block;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        GetAllTestCategory();
+        researchData();
+    });
+</script>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header bread">
+        <div class="container-fluid">
+            <div class="row mb-2 top-title">
+                <div class="col-sm-9">
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="myselection">
+        <div class="container-fluid mycenter">
+            <div class="row">
+                <div class="col-sm-4 col-6">
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="ddlCategoryId" name="ddlCategoryId" data-val="true" data-val-required="Category is required." class="form-control select2">
+                        </select>
+                        <span id="errorcategory" class="text-danger"></span>
+                    </div>
+                </div>
+                
+                <div class="col-sm-3 col-6">
+                    <div class="sbutton">
+                        <button type="button" onclick="researchData();" class="btn btn-sm btn-primary">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card card-primary outer-row">
+                        <div class="card-body myform">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="tblQuestionList" class="table table-bordered table-striped tblbackground dataTable dtr-inline">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Category</th>
+                                                <th>Question</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="loadQuestionData"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+    </section>
+
+</div>
+
+<script src="~/theams/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/ServiceScript/BaseUrl.js"></script>
+<script src="~/ServiceScript/onlineQuestion.js"></script>
+<script src="~/ServiceScript/Common.js"></script>
+<script src="~/ServiceScript/Service.js"></script>
+<script src="~/theams/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/theams/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="~/theams/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="~/ServiceScript/questionConfiguration.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js" crossorigin="anonymous"></script>
+<script src="~/theams/Toaster/ToasterJS/toastr.js"></script>
+
